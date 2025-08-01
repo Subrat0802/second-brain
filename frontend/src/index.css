@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.8s ease, color 0.8s ease;
 }
 
 @layer base {
@@ -11,5 +11,34 @@ html {
     @apply antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+
+body {
+  --sb-track-color: #080C13; 
+  --sb-thumb-color: #4B5563;
+  --sb-size: 5px;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 1px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 2px;
+  
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
   }
 }
