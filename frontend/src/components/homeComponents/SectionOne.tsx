@@ -2,7 +2,7 @@
 import Button from "../ui/Button"
 import { FaRocket } from "react-icons/fa";
 import { FaPlay } from "react-icons/fa6";
-import { sectionOneData } from "../../data/sectionOneData";
+import { sectionOneData } from "../../data/homeSectionOneData";
 import SectionOneCard from "../ui/SectionOneCard";
 
 
