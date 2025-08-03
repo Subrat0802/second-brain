@@ -1,6 +1,6 @@
-import { Instagram, Twitter, Bookmark, MessageCircleQuestionMark , type LucideIcon } from "lucide-react"
+import { Instagram, Twitter, Bookmark, type LucideIcon, OctagonAlert } from "lucide-react"
 
-export const sectionTwoData: {
+export const sectionTwoDataa: {
     id: string,
     icon: LucideIcon,
     title: string,
@@ -29,7 +29,7 @@ export const sectionTwoData: {
     },
     {
         id: "3",
-        icon: MessageCircleQuestionMark,
+        icon: OctagonAlert ,
         title: "Al Development Guide",
         description: "Complete guide to building Al applications with modern frameworks...",
         tag: "Tech",

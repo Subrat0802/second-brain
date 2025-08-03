@@ -11,7 +11,7 @@ export interface SectionProps {
 
 const SectionTwoCard = ({icon:Icon ,title, description, tag, time, icontwo: IconTwo}:SectionProps ) => {
   return (
-    <div className="w-[33%] border rounded-xl bg-white dark:bg-transparent pt-10 pb-5 px-3 flex shadow-md flex-col gap-3 font-inter border-[#ebe7e7] dark:border-[#111624] ">
+    <div className="w-full md:w-[33%] border rounded-xl bg-white dark:bg-transparent pt-10 pb-5 px-3 flex shadow-md flex-col gap-3 font-inter border-[#ebe7e7] dark:border-[#111624] ">
         <div className="flex justify-between items-center text-[#4B5563]">
             <p className="bg-[#ececec] dark:bg-[#0d121d]  font-bold w-fit p-3 rounded-xl"><Icon   size={24} className="text-primary" /></p>
             <p>{time}</p>
