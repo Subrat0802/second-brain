@@ -3,6 +3,13 @@ import './App.css'
 import Header from './components/common/Header'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
+import DashboardHome from './components/dashboardComponents/dashboardPages/DashboardHome'
+import Discover from './components/dashboardComponents/dashboardPages/Discover'
+import Saved from './components/dashboardComponents/dashboardPages/Saved'
+import Links from './components/dashboardComponents/dashboardPages/Links'
+import Images from './components/dashboardComponents/dashboardPages/Images'
+import Collections from './components/dashboardComponents/dashboardPages/Collections'
+import Profile from './components/dashboardComponents/dashboardPages/Profile'
 
 function App() {
   return (
@@ -10,7 +17,16 @@ function App() {
       <Header />
         <Routes>
           <Route path='/' element={<Home />}/>
-          <Route path='/dashboard' element={<Dashboard />}/>
+
+          <Route path='/dashboard' element={<Dashboard />}>
+            <Route index element={<DashboardHome />}/>
+            <Route path='discover' element={<Discover />}/>
+            <Route path='saved' element={<Saved />}/>
+            <Route path='links' element={<Links />}/>
+            <Route path='images' element={<Images />}/>
+            <Route path='collections' element={<Collections />}/>
+            <Route path='profile' element={<Profile />}/>
+          </Route>
         </Routes>
     </div>
   )

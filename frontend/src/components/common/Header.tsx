@@ -5,10 +5,11 @@ import { NavLink, useLocation } from "react-router-dom";
 
 const Header = () => {
   const location = useLocation();
-  console.log(location);
   const {pathname} = location;
+  const path = pathname.split("/")
+ 
   return (
-    <div className={`h-[9vh] ${pathname ==="/dashboard" && "border-b-2 "} dark:border-b-2 dark:border-[#111827] px-3 md:px-0 fixed w-full z-30 bg-white dark:bg-[#080C13] `}>
+    <div className={`h-[9vh] ${path[1] ==="dashboard" && "border-b-2 "} dark:border-b-2 dark:border-[#111827] px-3 md:px-0 fixed w-full z-30 bg-white dark:bg-[#080C13] `}>
       <div className="max-w-7xl  h-full mx-auto flex justify-between items-center font-inter  text-[#111827] dark:text-[#7F7F7F] py-2 ">
         <NavLink to={"/"}>
           <div className="flex justify-center gap-2 items-center ">
@@ -31,8 +32,9 @@ const Header = () => {
           <Button text="Sign in" varient="primary" size="sm" />
           <ThemeToggle />
         </div>
-        <div className="text-2xl md:hidden block">
+        <div className="text-2xl md:hidden flex justify-center gap-2 items-center">
           <Menu className="w-8 h-8" />
+          <ThemeToggle />
         </div>
       </div>
     </div>

@@ -1,17 +1,20 @@
+import { Outlet } from "react-router-dom";
 import Sidebar from "../components/ui/Sidebar";
+import SidebarProfile from "../components/ui/SidebarProfile";
 
 const Dashboard = () => {
   return (
-    <div className="min-h-[100dvh] font-inter relative">
+    <div className="min-h-[100dvh] font-inter relative flex">
   
       <Sidebar />
 
       
-      <div className="md:ml-[180px] ml-[47px]  h-[100vh] border-b-4 border-red-700 pt-[10dvh]">
-        <div className="border-green-700 border w-full h-full">
-            
-        </div>
+      <div className="md:ml-[192px] ml-[45px] w-full md:mr-[300px] h-[91vh] mt-[9vh]">
+        <Outlet />
       </div>
+
+      <SidebarProfile />
+      
     </div>
   );
 };
