@@ -1,10 +1,23 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../components/ui/Sidebar";
 import SidebarProfile from "../components/ui/SidebarProfile";
+import Dialog from "../components/ui/Dialog";
+import { useSelector } from "react-redux";
+import type { RootState } from "../main";
+
+
 
 const Dashboard = () => {
+
+  const stateDialog = useSelector((state: RootState) => state.commonState.dialogState);
+  
   return (
     <div className="min-h-[100dvh] font-inter relative flex">
+
+      {
+        stateDialog && <Dialog />
+      }
+      
   
       <Sidebar />
 
