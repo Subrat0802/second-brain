@@ -1,15 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../main";
 import { setDialogState } from "../../redux/slices/commonStates";
+import DataForm from "./DataForm";
 
 const Dialog = () => {
+  const dispatch = useDispatch();
+  const dialogState = useSelector(
+    (state: RootState) => state.commonState.dialogState
+  );
 
-    const dispatch = useDispatch();
-    const dialogState = useSelector((state: RootState) => state.commonState.dialogState);
-
-    const setDialogHandle = () => {
-        dispatch(setDialogState(!dialogState))
-    }
+  const setDialogHandle = () => {
+    dispatch(setDialogState(!dialogState));
+  };
   return (
     <div className="fixed w-[100dvw] h-[100dvh] z-40">
       {/* Semi-transparent overlay */}
@@ -18,9 +20,7 @@ const Dialog = () => {
           className="w-full h-[100dvh] flex justify-center items-center"
           onClick={setDialogHandle}
         >
-          <div className="mx-auto border p-3 w-[35%] bg-[#1F2937]">
-            
-          </div>
+          <DataForm />
         </div>
       </div>
     </div>
