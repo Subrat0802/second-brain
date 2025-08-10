@@ -12,7 +12,7 @@ const Dashboard = () => {
   const stateDialog = useSelector((state: RootState) => state.commonState.dialogState);
   
   return (
-    <div className="min-h-[100dvh] font-inter relative flex">
+    <div className="min-h-[200dvh] font-inter relative flex">
 
       {
         stateDialog && <Dialog />

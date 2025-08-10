@@ -20,11 +20,16 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { username, email, password } = req.body;
+        const { username, email, password, conPassword } = req.body;
         if (!username || !email || !password) {
             return res.status(400).json({
                 message: "All fields are required",
                 success: false,
+            });
+        }
+        if (password != conPassword) {
+            return res.status(408).json({
+                message: "Wrong password, password does not match"
             });
         }
         const user = yield user_1.userModel.findOne({ email });

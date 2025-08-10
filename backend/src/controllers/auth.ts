@@ -9,12 +9,19 @@ dotenv.config();
 
 export const signup = async (req: Request, res: Response) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, conPassword } = req.body;
+    
     if (!username || !email || !password) {
       return res.status(400).json({
         message: "All fields are required",
         success: false,
       });
+    }
+
+    if(password != conPassword) {
+      return res.status(408).json({
+        message:"Wrong password, password does not match"
+      })
     }
 
     const user = await userModel.findOne({ email });

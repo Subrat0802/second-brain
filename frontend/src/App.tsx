@@ -10,14 +10,21 @@ import Links from './components/dashboardComponents/dashboardPages/Links'
 import Images from './components/dashboardComponents/dashboardPages/Images'
 import Collections from './components/dashboardComponents/dashboardPages/Collections'
 import Profile from './components/dashboardComponents/dashboardPages/Profile'
+import Test from './pages/Test'
+import Auth from './pages/Auth'
+import Signup from './components/authComponents/Signup'
+import Signin from './components/authComponents/Signin'
 
 function App() {
   return (
     <div className='dark:bg-[#080C13] dark:text-[#7F7F7F] '>
       <Header />
         <Routes>
-          <Route path='/' element={<Home />}/>
-
+          <Route path='/' element={<Home />}></Route>
+          <Route path='/auth' element={<Auth />}>
+            <Route path='signup' element={<Signup />}/>
+            <Route path='signin' element={<Signin />}/>
+          </Route>
           <Route path='/dashboard' element={<Dashboard />}>
             <Route index element={<DashboardHome />}/>
             <Route path='discover' element={<Discover />}/>
@@ -27,6 +34,7 @@ function App() {
             <Route path='collections' element={<Collections />}/>
             <Route path='profile' element={<Profile />}/>
           </Route>
+          <Route path='/test' element={<Test />}/>
         </Routes>
     </div>
   )

@@ -28,8 +28,8 @@ const Header = () => {
         </div>
         <div className="hidden md:flex gap-4 justify-center items-center ">
           {/* <Button text="Add Link" startIcon={<Plus />} varient="primary" size="sm"/> */}
-          <Button text="Sign up" varient="primary" size="sm" />
-          <Button text="Sign in" varient="primary" size="sm" />
+          <NavLink to={"/auth/signup"}><Button text="Sign up" varient="primary" size="sm" /></NavLink>
+          <NavLink to={"/auth/signin"}><Button text="Sign in" varient="primary" size="sm" /></NavLink>
           <ThemeToggle />
         </div>
         <div className="text-2xl md:hidden flex justify-center gap-2 items-center">

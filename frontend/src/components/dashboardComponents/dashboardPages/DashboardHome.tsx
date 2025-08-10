@@ -19,6 +19,11 @@ const DashboardHome = () => {
           <Button text={"Add Item"}  size={"sm"} varient="primary" startIcon={<Plus />} onClick={handleClickAddItem}/>
         </div>
       </div>
+
+      {/* all posts  */}
+      <div className="">
+        
+      </div>
     </div>
   )
 }

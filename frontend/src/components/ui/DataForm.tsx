@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import Button from "./Button";
+import LinkForm from "../dashboardComponents/dashBoardComponents/LinkForm";
+import ImageForm from "../dashboardComponents/dashBoardComponents/ImageForm";
+import NotesForm from "../dashboardComponents/dashBoardComponents/NotesForm";
 
 const DataForm = () => {
   const [selectedTag, setSelectedTag] = useState("Link");
@@ -28,42 +30,16 @@ const DataForm = () => {
           <p>Notes</p>
         </div>
       </div>
-      <div className="flex flex-col gap-3">
-        <div className="flex flex-col">
-          <label htmlFor="url">URL:</label>
-          <input
-            id="url"
-            placeholder="Url Link"
-            className="bg-[#374151] rounded-xl p-2"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="title">Title:</label>
-          <input
-            id="title"
-            placeholder="Title"
-            className="bg-[#374151] rounded-xl p-2"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            placeholder="description"
-            rows={4}
-            className="bg-[#374151] rounded-xl p-2"
-          />
-        </div>
-        <div className="flex flex-col mb-3">
-          <label htmlFor="tags">Title:</label>
-          <input
-            id="tags"
-            placeholder="Tags"
-            className="bg-[#374151] rounded-xl p-2 "
-          />
-        </div>
-        <Button size="sm" varient="secondary" text="Add Iten" />
-      </div>
+      {
+        selectedTag === "Link" && <LinkForm />
+      }
+      {
+        selectedTag === "Images" && <ImageForm />
+      }
+      {
+        selectedTag === "Notes" && <NotesForm />
+      }
+      
     </div>
   );
 };
