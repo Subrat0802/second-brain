@@ -34,7 +34,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const user = yield user_1.userModel.findOne({ email });
         if (user) {
-            return res.status(409).json({
+            return res.status(402).json({
                 message: "User is already registered, try with different email address.",
                 success: false,
             });
@@ -103,6 +103,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             message: "User login successfully",
             success: true,
             data: findUser,
+            token: token
         });
     }
     catch (err) {

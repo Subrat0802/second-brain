@@ -27,10 +27,9 @@ export const signup = async (req: Request, res: Response) => {
     const user = await userModel.findOne({ email });
 
     if (user) {
-      return res.status(409).json({
-        message:
-          "User is already registered, try with different email address.",
-        success: false,
+      return res.status(402).json({
+        message:"User is already registered, try with different email address.",
+          success: false,
       });
     }
 
@@ -110,6 +109,7 @@ export const signin = async (req: Request, res: Response) => {
       message: "User login successfully",
       success: true,
       data: findUser,
+      token:token
     });
   } catch (err) {
     let errorMessage = "Something went wrong, server!";
