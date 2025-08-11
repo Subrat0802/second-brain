@@ -17,7 +17,7 @@ const InputTag = React.forwardRef<HTMLInputElement, propItems>(
           ref={ref}
           placeholder={placeText}
           id={id}
-          className="bg-[#374151] rounded-lg p-2"
+          className="dark:bg-[#374151] rounded-lg p-2 border border-black dark:border-[#374151]"
           type={type}
           onChange={onChange}
         />

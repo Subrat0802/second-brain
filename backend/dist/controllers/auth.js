@@ -96,7 +96,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const token = jsonwebtoken_1.default.sign({ email: findUser.email, id: findUser._id }, process.env.JWT_SECRET, { expiresIn: "24h" });
         const options = {
             expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-            httpOnly: true,
+            // httpOnly: true,
         };
         findUser.password = undefined;
         return res.cookie("token", token, options).status(200).json({

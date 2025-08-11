@@ -2,10 +2,16 @@ import { useRef, type FormEvent } from "react";
 import Button from "../ui/Button";
 import InputTag from "../ui/InputTag";
 import { signin } from "../../services/operations/auth";
+import { toast } from "sonner";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../redux/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = () => {
     
@@ -17,7 +23,15 @@ const Signin = () => {
     const password = passwordRef.current?.value || "";
 
     const response = await signin({email, password})
-    console.log("response", response)
+    console.log("RESPONSE,", response.data.token);
+    if (response.status == 200) {
+      dispatch(setToken(response.data.token));
+      navigate("/dashboard");
+      toast.success(response.data?.message);
+    }else{
+      toast.error(response.data.message);
+      throw Error
+    }
   }
 
   return (

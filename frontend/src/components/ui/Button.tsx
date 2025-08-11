@@ -10,11 +10,11 @@ export interface ButtonProps {
 }
 
 const varientSize = {
-    "primary": "p-1 px-2 md:p-2 md:px-4 flex justify-center items-center gap-x-2 font-medium rounded-lg bg-[#080C13] text-white/80 dark:text-[#7F7F7F] dark:border border-[#7F7F7F] flex hover:bg-[#020305] hover:text-gray-100 transition-all duration-200 dark:hover:bg-[#090e16] dark:hover:border-[#c5c5c5] dark:hover:text-[#c5c5c5] transition-all duration-200",
+    "primary": "p-1 px-2 md:p-2 md:px-4 flex justify-center items-center gap-x-2 font-medium rounded-lg bg-[#080C13] text-white/80 dark:text-[#7F7F7F] border border-[#7F7F7F] flex hover:bg-[#020305] hover:text-gray-100 transition-all duration-200 dark:hover:bg-[#090e16] dark:hover:border-[#c5c5c5] dark:hover:text-[#c5c5c5] transition-all duration-200",
 
-    "secondary": "p-2 md:p-3 md:px-9 flex justify-center items-center  gap-x-2 font-medium rounded-lg bg-[#080C13] text-white/80 dark:text-[#7F7F7F] text-md md:text-lg dark:border dark:border-[#7F7F7F] flex hover:bg-[#020305] hover:text-gray-300 transition-all duration-200 dark:hover:bg-[#090e16] dark:hover:border-[#c5c5c5] dark:hover:text-[#c5c5c5] transition-all duration-200",
+    "secondary": "p-2 md:p-3 md:px-9 flex justify-center items-center  gap-x-2 font-medium rounded-lg bg-[#080C13] text-white/80 dark:text-[#7F7F7F] text-md md:text-lg border  dark:border-[#7F7F7F] flex hover:bg-[#020305] hover:text-gray-300 transition-all duration-200 dark:hover:bg-[#090e16] dark:hover:border-[#c5c5c5] dark:hover:text-[#c5c5c5] transition-all duration-200",
 
-    "tertiary": "p-2 md:p-3  md:px-9 flex justify-center text-md md:text-lg items-center gap-x-2 font-medium rounded-lg text- border-2 border-gray-300 text-[#080C13] dark:text-[#7F7F7F] dark:border dark:border dark:border-[#7F7F7F] flex dark:hover:bg-[#090e16] dark:hover:border-[#c5c5c5] dark:hover:text-[#c5c5c5] transition-all duration-200"
+    "tertiary": "p-2 md:p-3  md:px-9 flex justify-center text-md md:text-lg items-center gap-x-2 font-medium rounded-lg text- border border-gray-300 text-[#080C13] dark:text-[#7F7F7F] dark:border-[#7F7F7F] flex dark:hover:bg-[#090e16] dark:hover:border-[#c5c5c5] dark:hover:text-[#c5c5c5] transition-all duration-200"
 }
 
 const sizeStyle = {
