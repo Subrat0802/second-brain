@@ -48,12 +48,24 @@ const contentSchema = new mongoose_1.default.Schema({
     },
     type: {
         type: String,
-        enum: ["Youtube", "Instagram", "X", "Facebook", "Image", "Link", "Notes"],
-        required: true
+        enum: ["Youtube", "Instagram", "X", "Facebook"],
+        trim: true,
+        required: function () {
+            return !!this.link;
+        }
     },
-    Link: {
+    link: {
         type: String,
-        required: true
-    }
-});
+        trim: true
+    },
+    image: {
+        type: String,
+        trim: true
+    },
+    tag: [{
+            type: String,
+            trim: true,
+            lowercase: true
+        }]
+}, { timestamps: true });
 exports.contentModel = (0, mongoose_1.model)("Content", contentSchema);

@@ -9,6 +9,7 @@ const dbconnect_1 = require("./config/dbconnect");
 const authroute_1 = require("./routes/authroute");
 const dotenv_1 = __importDefault(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
+const contentRoute_1 = require("./routes/contentRoute");
 dotenv_1.default.config();
 const PORT = process.env.PORT || 3002;
 const app = (0, express_1.default)();
@@ -20,6 +21,7 @@ app.use((0, cors_1.default)({
 }));
 (0, dbconnect_1.dbconnect)();
 app.use("/api/v1/auth", authroute_1.authrouter);
+app.use("/api/v1/content", contentRoute_1.contentRoute);
 app.get("/", (req, res) => {
     res.send("Hi there");
 });

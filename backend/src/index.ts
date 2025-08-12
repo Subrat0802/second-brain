@@ -4,6 +4,7 @@ import { dbconnect } from "./config/dbconnect";
 import { authrouter } from "./routes/authroute";
 import dotenv from "dotenv";
 import cors from "cors";
+import { contentRoute } from "./routes/contentRoute";
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use(cors({
 dbconnect();
 
 app.use("/api/v1/auth", authrouter);
+app.use("/api/v1/content", contentRoute );
 
 app.get("/", (req, res) => {
     res.send("Hi there");
