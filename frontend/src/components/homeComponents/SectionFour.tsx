@@ -9,8 +9,8 @@ const SectionFour = () => {
         <p className="text-[24px] text-center md:text-[42px]">Ready to Build Your Second Brain?</p>
         <p className="text-[#4B5563] text-sm text-center mt-2 md:mt-0 md:text-lg font-medium mb-10">Join thousands of users who are already organizing their digital lives with SecondBrain</p>
         <div className="flex gap-4">
-            <Button text="Get Started Free" startIcon={<FaRocket />} varient="secondary" size="sm"/>
-            <Button text="Schedule Demo" startIcon={<Calendar />} varient="tertiary" size="sm"/>
+            <Button text="Get Started Free" startIcon={<FaRocket />} variant="secondary" size="sm"/>
+            <Button text="Schedule Demo" startIcon={<Calendar />} variant="tertiary" size="sm"/>
         </div>
     </div>
   )

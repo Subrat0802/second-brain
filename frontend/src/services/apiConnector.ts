@@ -6,7 +6,7 @@ export const axiosInstance = axios.create({withCredentials:true});
 export const apiConnector = (
   method: string,
   url: string,
-  bodyData: any = null, // <-- explicitly say it can be any
+  bodyData: any = null, 
   headers: Record<string, string> = {},
   params: Record<string, any> = {}
 ) => {

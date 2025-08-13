@@ -16,7 +16,7 @@ const LinkForm = () => {
           />
         </div>
         <InputTag placeText='Tags' labelText='Tags:' id='tag' type='text'/>
-        <Button text="Submit" size="md" varient="primary" />
+        <Button text="Submit" size="md" variant="primary" />
       </div>
   )
 }

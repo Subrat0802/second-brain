@@ -59,7 +59,7 @@ const Signin = () => {
           onChange={handleChange}
         />
 
-        <Button text="Sign In" varient="tertiary" size="lg" />
+        <Button text="Sign In" variant="tertiary" size="lg" />
       </form>
     </div>
   );

@@ -14,7 +14,7 @@ const NotesForm = () => {
             className="bg-[#374151] rounded-xl p-2"
           />
         </div>
-        <Button text="Submit" size="md" varient="primary" />
+        <Button text="Submit" size="md" variant="primary" />
     </div>
   )
 }

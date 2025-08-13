@@ -60,10 +60,10 @@ const Header = () => {
           ) : (
             <>
               <NavLink to={"/auth/signup"}>
-                <Button text="Sign up" varient="primary" size="sm" />
+                <Button text="Sign up" variant="primary" size="sm" />
               </NavLink>
               <NavLink to={"/auth/signin"}>
-                <Button text="Sign in" varient="primary" size="sm" />
+                <Button text="Sign in" variant="primary" size="sm" />
               </NavLink>
             </>
           )}

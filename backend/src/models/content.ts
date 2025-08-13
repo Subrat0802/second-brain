@@ -1,6 +1,11 @@
 import mongoose, { model } from "mongoose";
 
 const contentSchema = new mongoose.Schema({
+  contentType:{
+    type:String,
+    enum:["Link", "Image", "Notes"],
+    required:true
+  },
   title: {
     type: String,
     required: true,

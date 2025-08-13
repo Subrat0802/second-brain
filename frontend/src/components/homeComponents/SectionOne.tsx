@@ -14,8 +14,8 @@ const SectionOne = () => {
         <p className="text-center text-md md:text-xl mb-10 text-[#4B5563] font-semibold">Save, organize, and rediscover your most important social media <br className="hidden md:block"/>  posts, links, and content in one beautiful place.</p>
 
         <div className="flex gap-4 mb-14">
-            <Link to={"/dashboard"}><Button startIcon={<FaRocket />} text="Start Saving Now" varient="secondary" size="sm"/></Link>
-            <Button startIcon={<FaPlay />} text="Watch Demo" varient="tertiary" size="sm"/>
+            <Link to={"/dashboard"}><Button startIcon={<FaRocket />} text="Start Saving Now" variant="secondary" size="sm"/></Link>
+            <Button startIcon={<FaPlay />} text="Watch Demo" variant="tertiary" size="sm"/>
         </div>
 
         <div className="px-1 md:px-0 max-w-7xl w-full flex flex-col md:flex-row gap-6 md:gap-14 justify-center ">

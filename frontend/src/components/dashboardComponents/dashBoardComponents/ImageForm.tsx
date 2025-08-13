@@ -16,7 +16,7 @@ const ImageForm = () => {
         </div>
 
         <InputTag labelText="Upload Image:" placeText="Upload Image" id="image" type="file"/>
-        <Button text="Submit" size="md" varient="primary" />
+        <Button text="Submit" size="md" variant="primary" />
     </div>
   )
 }

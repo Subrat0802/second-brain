@@ -69,7 +69,7 @@ const Signup = () => {
           id="conPassword"
           type="text"
         />
-        <Button text="Sign Up" varient="tertiary" size="lg" />
+        <Button text="Sign Up" variant="tertiary" size="lg" />
       </form>
     </div>
   );

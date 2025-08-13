@@ -16,7 +16,7 @@ const DashboardHome = () => {
       <div className=" flex justify-between items-center">
         <p className="text-2xl">Hello User</p>
         <div>
-          <Button text={"Add Item"}  size={"sm"} varient="primary" startIcon={<Plus />} onClick={handleClickAddItem}/>
+          <Button text={"Add Item"}  size={"sm"} variant="primary" startIcon={<Plus />} onClick={handleClickAddItem}/>
         </div>
       </div>
 

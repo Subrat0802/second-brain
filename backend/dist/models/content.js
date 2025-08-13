@@ -36,6 +36,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.contentModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const contentSchema = new mongoose_1.default.Schema({
+    contentType: {
+        type: String,
+        enum: ["Link", "Image", "Notes"],
+        required: true
+    },
     title: {
         type: String,
         required: true,
