@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signin = exports.signup = void 0;
+exports.getUserData = exports.signin = exports.signup = void 0;
 const user_1 = require("../models/user");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -119,3 +119,31 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.signin = signin;
+const getUserData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        //@ts-ignore
+        const { id } = req === null || req === void 0 ? void 0 : req.user;
+        const userData = yield user_1.userModel.findById(id).populate("content").exec();
+        if (!userData) {
+            return res.status(404).json({
+                message: "user not found, please re-login."
+            });
+        }
+        return res.status(200).json({
+            message: "All user Data",
+            data: userData
+        });
+    }
+    catch (error) {
+        let errorMessage = "Something went wrong, server!";
+        if (error instanceof Error) {
+            errorMessage = error.message;
+        }
+        return res.status(500).json({
+            message: "Server error while login.",
+            success: false,
+            error: errorMessage,
+        });
+    }
+});
+exports.getUserData = getUserData;

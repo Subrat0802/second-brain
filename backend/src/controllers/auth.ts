@@ -124,3 +124,33 @@ export const signin = async (req: Request, res: Response) => {
     });
   }
 };
+
+
+export const getUserData = async (req:Request , res:Response) => {
+  try{
+    //@ts-ignore
+    const {id} = req?.user;
+    const userData = await userModel.findById(id).populate("content").exec();
+    if(!userData){
+      return res.status(404).json({
+        message:"user not found, please re-login."
+      })
+    }
+    return res.status(200).json({
+      message:"All user Data",
+      data:userData
+    })
+
+
+  }catch(error){
+    let errorMessage = "Something went wrong, server!";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    return res.status(500).json({
+      message: "Server error while login.",
+      success: false,
+      error: errorMessage,
+    });
+  }
+}

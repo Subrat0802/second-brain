@@ -1,20 +1,16 @@
 import Button from "../../ui/Button"
 import InputTag from "../../ui/InputTag"
+import TextArea from "../../ui/TextArea"
 
 const NotesForm = () => {
   return (
     <div className="flex flex-col gap-4">
         <InputTag type="text" labelText="Title:" id="title" placeText="Title"/>
-        <div className="flex flex-col">
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            placeholder="description"
-            rows={4}
-            className="bg-[#374151] rounded-xl p-2"
-          />
-        </div>
+        <TextArea label='Description' htmlFor='description' placeholder='Description' id='description' rows={4}/>
+        <div className="flex  gap-3 right-0  mt-5">
         <Button text="Submit" size="md" variant="primary" />
+        <Button text="Clear" size="md" variant="tertiary" />
+      </div>
     </div>
   )
 }

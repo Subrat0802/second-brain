@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    dialogState: false
+    dialogState: false,
+    userContent: null
 }
 
 const commonSlice = createSlice({
@@ -10,9 +11,12 @@ const commonSlice = createSlice({
     reducers: {
         setDialogState(state, value){
             state.dialogState = value.payload
+        },
+        setUserContent(state, value){
+            state.userContent = value.payload
         }
     }
 })
 
-export const {setDialogState} = commonSlice.actions;
+export const {setDialogState, setUserContent} = commonSlice.actions;
 export default commonSlice.reducer;

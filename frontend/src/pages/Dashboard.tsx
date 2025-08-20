@@ -2,17 +2,23 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "../components/ui/Sidebar";
 import SidebarProfile from "../components/ui/SidebarProfile";
 import Dialog from "../components/ui/Dialog";
-import { useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../main";
-
+// import { useEffect } from "react";
+// import { getUser } from "../services/operations/auth";
+// import { setUserContent } from "../redux/slices/commonStates";
+import useGetUser from "../services/getUserHook";
+import { useSelector } from "react-redux";
 
 
 const Dashboard = () => {
 
+  useGetUser();
+
   const stateDialog = useSelector((state: RootState) => state.commonState.dialogState);
   
   return (
-    <div className="min-h-[200dvh] font-inter relative flex">
+    <div className="min-h-[100dvh] font-inter relative flex">
 
       {
         stateDialog && <Dialog />

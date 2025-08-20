@@ -3,12 +3,14 @@ import Button from "../ui/Button";
 import InputTag from "../ui/InputTag";
 import { signup } from "../../services/operations/auth";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const userNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const conPassRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const handleChange = () => {};
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -22,6 +24,7 @@ const Signup = () => {
     console.log("RESPONSE,", response);
     if (response.status == 200) {
       toast.success(response.data?.message);
+      navigate("/auth/signin")
     }else{
       toast.error(response.data.message);
       throw Error
@@ -69,7 +72,7 @@ const Signup = () => {
           id="conPassword"
           type="text"
         />
-        <Button text="Sign Up" variant="tertiary" size="lg" />
+        <Button text="Sign Up" variant="tertiary" size="lg" type="submit"/>
       </form>
     </div>
   );

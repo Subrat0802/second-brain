@@ -53,7 +53,7 @@ const contentSchema = new mongoose_1.default.Schema({
     },
     type: {
         type: String,
-        enum: ["Youtube", "Instagram", "X", "Facebook"],
+        enum: ["Youtube", "Instagram", "X", "Facebook", "Other"],
         trim: true,
         required: function () {
             return !!this.link;

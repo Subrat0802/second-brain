@@ -12,10 +12,10 @@ const DataForm = () => {
   }
   return (
     <div
-      className="mx-auto p-6 rounded-xl w-[35%] bg-[#1F2937] text-[#FFFFFF]"
+      className="mx-auto p-6 rounded-xl w-[35%] font-inter dark:bg-[#1F2937] bg-white text-[#FFFFFF]"
       onClick={(e) => e.stopPropagation()}
     >
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center text-black dark:text-[#FFFFFF]">
         <p className="text-2xl ">Add New Items</p>
         <p>x</p>
       </div>
