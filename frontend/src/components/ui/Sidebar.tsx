@@ -12,7 +12,7 @@ const Sidebar = () => {
     setClickedPage(text ?? "");
   }
   return (
-    <div className="fixed text-[#4B5563] dark:text-[#7F7F7F] border-r-2  dark:border-r-2 dark:border-[#111827] h-screen flex pt-[10dvh]">
+    <div className="dark:bg-[#080C13] fixed text-[#4B5563] dark:text-[#7F7F7F] border-r-2  dark:border-r-2 dark:border-[#111827] h-screen flex pt-[10dvh]">
       <div className="h-full flex flex-col gap-3 md:p-3 ">
 
         {

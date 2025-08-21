@@ -18,7 +18,7 @@ import ProtectedRoute from "./services/ProtectedRoute";
 
 function App() {
   return (
-    <div className="dark:bg-[#080C13] dark:text-[#7F7F7F] ">
+    <div className="min-h-screen bg-white dark:bg-[#080C13] text-black dark:text-[#7F7F7F] ">
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>

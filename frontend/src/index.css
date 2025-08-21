@@ -5,7 +5,16 @@
 html {
   transition: background-color 0.8s ease, color 0.8s ease;
 }
+html, body, #root {
+  min-height: 100vh;
+  background-color: white; /* light */
+}
 
+.dark html,
+.dark body,
+.dark #root {
+  background-color: #080C13; /* dark */
+}
 @layer base {
   body {
     @apply antialiased;
