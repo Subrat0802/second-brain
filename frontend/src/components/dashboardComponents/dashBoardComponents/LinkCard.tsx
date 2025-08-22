@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Bookmark, Trash } from "lucide-react";
 import { useEffect } from "react";
 
 export interface contentProps {
@@ -19,38 +20,36 @@ const LinkCard = ({
   createdAt,
   link,
 }: contentProps) => {
-
-    useEffect(() => {
-    // Re-run Instagram embeds
+  useEffect(() => {
     //@ts-ignore
     if (window.instgrm) {
-        //@ts-ignore
+      //@ts-ignore
       window.instgrm.Embeds.process();
     }
-
-    // Re-run Twitter (X) embeds
     if ((window as any).twttr?.widgets) {
       (window as any).twttr.widgets.load();
     }
   }, [link]);
   return (
-    <div className="">
+    <div className="bg-[#1F2937] dark:bg-[#1F2937] border border-gray-800 rounded-2xl overflow-hidden
+     shadow-md 
+    hover:shadow-lg transition-shadow duration-300">
       {contentType === "Link" && (
-        <div className=" w-fit">
-          {type === "Youtube" && (
-            <div>
+        <div>
+           {type === "Youtube" && (
+            <div className="relative w-full h-[200px] p-2 bg-gradient-to-r from-[#FF0000] to-[#CC0000]">
               <iframe
                 width="100%"
-                height="200"
+                height="100%"
                 src={link.replace("watch?v=", "embed/")}
                 title="YouTube video player"
-                className="rounded-xl"
+                className="w-full h-full rounded-t-2xl"
               ></iframe>
             </div>
           )}
 
           {type === "X" && (
-            <div>
+            <div className="p-3 bg-[#15202B]">
               <blockquote className="twitter-tweet" data-theme="dark">
                 <a href={link.replace("x.com", "twitter.com")}></a>
               </blockquote>
@@ -58,26 +57,46 @@ const LinkCard = ({
           )}
 
           {type === "Instagram" && (
-            <div className="">
+            <div className="bg-white p-2 bg-gradient-to-t from-[#FFC200] via-[#FF5123] to-[#D300C5] ">
               <blockquote
-                className="instagram-media w-14"
+                className="instagram-media"
                 data-instgrm-permalink={link.replace("reels", "reel")}
-                data-instgrm-version="14" 
-                style={{
-                  width: "100%",
-                  minWidth: "200px",
-                  maxWidth: "250px",
-                  margin: "0 auto",
-                  background: "#000",
-                  backgroundColor:"#0f0f0f"
-                }}
+                data-instgrm-version="14"
+                style={{ margin: "0 auto" }}
               ></blockquote>
-              
             </div>
           )}
-            <p>{title}</p>
-              <p>{description}</p>
-              <p>{createdAt}</p>
+
+          {type === "Other" && (
+            <div className="relative w-full h-[200px] p-2">
+              <iframe
+                width="100%"
+                height="100%"
+                src={link}
+                title="YouTube video player"
+                className="w-full h-full rounded-t-2xl"
+              ></iframe>
+            </div>
+          )}
+
+          {/* Content Info */}
+          <div className="p-3 space-y-1">
+            <p className="text-sm font-medium text-white">{title}</p>
+            <p className="text-xs text-gray-400">{description}</p>
+            <p className="text-xs text-gray-500">
+              Created At: {new Date(createdAt).toLocaleString()}
+            </p>
+
+            {/* Actions */}
+            <div className="flex justify-between items-center pt-2">
+              <button className="p-1 hover:text-yellow-400 transition-colors">
+                <Bookmark size={18} />
+              </button>
+              <button className="p-1 hover:text-red-500 transition-colors">
+                <Trash size={18} />
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
@@ -85,3 +104,74 @@ const LinkCard = ({
 };
 
 export default LinkCard;
+
+{
+  /* <div className=" grid grid-cols-3 mt-8 gap-4">
+        <div>
+          {
+            //@ts-ignore
+            !userContent || userContent.length === 0 ? (
+              <p>Loading..</p>
+            ) : (
+              //@ts-ignore
+              userContent?.filter((el: { type: string; }) => el.type === "Instagram")
+                .map((el: { _id: Key | null | undefined; contentType: string; title: string; description: string; type: string; link: string; createdAt: string; }) => (
+                  <LinkCard
+                    key={el._id}
+                    contentType={el.contentType}
+                    title={el.title}
+                    description={el.description}
+                    type={el.type}
+                    link={el.link}
+                    createdAt={el.createdAt}
+                  />
+                ))
+            )
+          }
+        </div>
+        <div>
+          {
+            //@ts-ignore
+            !userContent ? (
+              <p>Loading..</p>
+            ) : (
+              //@ts-ignore
+              userContent.filter((el) => el.type === "Youtube")
+                .map((el: { _id: Key | null | undefined; contentType: string; title: string; description: string; type: string; link: string; createdAt: string; }) => (
+                  <LinkCard
+                    key={el._id}
+                    contentType={el.contentType}
+                    title={el.title}
+                    description={el.description}
+                    type={el.type}
+                    link={el.link}
+                    createdAt={el.createdAt}
+                  />
+                ))
+            )
+          }
+        </div>
+        <div>
+          {
+            //@ts-ignore
+            !userContent ? (
+              <p>Loading..</p>
+            ) : (
+              //@ts-ignore
+              userContent.filter((el) => el.type === "X")
+                .map((el: { _id: Key | null | undefined; contentType: string; title: string; description: string; type: string; link: string; createdAt: string; }) => (
+                  <LinkCard
+                    key={el._id}
+                    contentType={el.contentType}
+                    title={el.title}
+                    description={el.description}
+                    type={el.type}
+                    link={el.link}
+                    createdAt={el.createdAt}
+                  />
+                ))
+            )
+          }
+        </div>
+      </div> */
+}

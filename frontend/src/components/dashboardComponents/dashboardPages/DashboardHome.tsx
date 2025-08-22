@@ -28,11 +28,12 @@ const DashboardHome = () => {
       </div>
 
       {/* all posts  */}
-      <div className=" grid grid-cols-3  mt-8 gap-4">
+      <div className="md:columns-3 columns-1 gap-6  ">
       {
         //@ts-ignore
         !userContent ? <p>Loading..</p> : userContent.map((el) => (
-          <LinkCard
+          <div key={el._id} className="mb-9 break-inside-avoid  rounded-xl">
+            <LinkCard
             key={el._id}
             contentType={el.contentType}
             title={el.title}
@@ -40,7 +41,11 @@ const DashboardHome = () => {
             type={el.type}
             link={el.link}
             createdAt={el.createdAt}
-          />
+          />  
+
+          </div>
+
+          
         ))
       }
       </div>
