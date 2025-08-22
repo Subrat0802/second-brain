@@ -15,7 +15,7 @@ const DashboardHome = () => {
     dispatch(setDialogState(!dialogState));
   }
   return (
-    <div className="p-4 min-h-[91vh] dark:bg-[#080C13]">  
+    <div className="p-4 min-h-[91vh] dark:bg-[#080C13] md:pr-10">  
       <div className=" flex justify-between items-center">
         <p className="text-2xl">Hello User</p>
         <div>
@@ -28,11 +28,11 @@ const DashboardHome = () => {
       </div>
 
       {/* all posts  */}
-      <div className="md:columns-3 columns-1 gap-6  ">
+      <div className="md:columns-3 columns-1 gap-6  w-full ">
       {
         //@ts-ignore
         !userContent ? <p>Loading..</p> : userContent.map((el) => (
-          <div key={el._id} className="mb-9 break-inside-avoid  rounded-xl">
+          <div key={el._id} className="mb-9 break-inside-avoid  rounded-xl w-[]">
             <LinkCard
             key={el._id}
             contentType={el.contentType}

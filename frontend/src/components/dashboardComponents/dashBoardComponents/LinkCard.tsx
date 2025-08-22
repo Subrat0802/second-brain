@@ -31,11 +31,11 @@ const LinkCard = ({
     }
   }, [link]);
   return (
-    <div className="bg-[#1F2937] dark:bg-[#1F2937] border border-gray-800 rounded-2xl overflow-hidden
+    <div className="w-[100%] bg-[#1F2937] dark:bg-[#1F2937] border border-gray-800 rounded-2xl overflow-hidden
      shadow-md 
     hover:shadow-lg transition-shadow duration-300">
       {contentType === "Link" && (
-        <div>
+        <div className="">
            {type === "Youtube" && (
             <div className="relative w-full h-[200px] p-2 bg-gradient-to-r from-[#FF0000] to-[#CC0000]">
               <iframe
@@ -57,12 +57,12 @@ const LinkCard = ({
           )}
 
           {type === "Instagram" && (
-            <div className="bg-white p-2 bg-gradient-to-t from-[#FFC200] via-[#FF5123] to-[#D300C5] ">
+            <div className="bg-white  bg-gradient-to-t flex justify-center p-2 items-center from-[#FFC200] via-[#FF5123] to-[#D300C5] ">
               <blockquote
                 className="instagram-media"
                 data-instgrm-permalink={link.replace("reels", "reel")}
                 data-instgrm-version="14"
-                style={{ margin: "0 auto" }}
+                style={{ margin: "0 auto", width:"100%" }}
               ></blockquote>
             </div>
           )}

@@ -15,8 +15,11 @@ import Auth from "./pages/Auth";
 import Signup from "./components/authComponents/Signup";
 import Signin from "./components/authComponents/Signin";
 import ProtectedRoute from "./services/ProtectedRoute";
+import useGetUser from "./services/getUserHook";
 
 function App() {
+  
+  useGetUser();
   return (
     <div className="min-h-screen bg-white dark:bg-[#080C13] text-black dark:text-[#7F7F7F] ">
       <Header />

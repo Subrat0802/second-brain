@@ -1,19 +1,18 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../components/ui/Sidebar";
-import SidebarProfile from "../components/ui/SidebarProfile";
+// import SidebarProfile from "../components/ui/SidebarProfile";
 import Dialog from "../components/ui/Dialog";
 // import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../main";
 // import { useEffect } from "react";
 // import { getUser } from "../services/operations/auth";
 // import { setUserContent } from "../redux/slices/commonStates";
-import useGetUser from "../services/getUserHook";
 import { useSelector } from "react-redux";
+
 
 
 const Dashboard = () => {
 
-  useGetUser();
 
   const stateDialog = useSelector((state: RootState) => state.commonState.dialogState);
   
@@ -28,11 +27,11 @@ const Dashboard = () => {
       <Sidebar />
 
       
-      <div className="md:ml-[192px] ml-[45px] w-full md:mr-[300px] h-[91vh] mt-[9vh]">
+      <div className="md:ml-[192px] ml-[45px] w-full h-[91vh] mt-[9vh]  ">
         <Outlet />
       </div>
 
-      <SidebarProfile />
+      {/* <SidebarProfile /> */}
       
     </div>
   );
