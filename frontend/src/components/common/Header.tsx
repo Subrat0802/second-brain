@@ -1,22 +1,40 @@
 import { Bell, Brain, Menu, User } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import Button from "../ui/Button";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../main";
 import { useEffect, useState } from "react";
 
 const Header = () => {
   const [token, setToken] = useState("");
+  const [onHover, setOnHover] = useState(false);
   const location = useLocation();
   const { pathname } = location;
   const path = pathname.split("/");
-
+  const navigate = useNavigate();
   const t1 = useSelector((state: RootState) => state.authState.token);
 
   useEffect(() => {
     setToken(t1);
   }, [t1]);
+
+  const handleOnMouseOver = () => {
+    setOnHover(true)
+  }
+  const handleOnMouseLeave = () => {
+    setOnHover(false)
+  }
+
+  const handleLogout = () => {
+  // expire the cookie
+  document.cookie =
+    "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+
+  console.log("Token cleared");
+  navigate("/")
+  window.location.reload(); // optional: refresh page
+};
 
   return (
     <div
@@ -46,13 +64,15 @@ const Header = () => {
           {token ? (
             <div className="flex justify-center items-center gap-4">
               <Bell />
-              <div className="relative cursor-pointer">
-                <User />
-                <div className="absolute right-0 mt-1 border p-2 hidden rounded-lg text-md">
-                  <ul className="flex flex-col gap-1">
+              <div className="relative cursor-pointer" onClick={handleOnMouseOver}  >
+                <div className="" >
+                  <User />
+                </div>
+                <div className={`absolute right-0 mt-1 p-2 rounded-lg text-md bg-[#0F141B] ${onHover ? "block": "hidden"}`}>
+                  <ul className="flex px-3  flex-col gap-3 text-lg text-white/50" onMouseLeave={handleOnMouseLeave}>
                     <li>Profile</li>
                     <li>Settings</li>
-                    <li>Logout</li>
+                    <li onClick={handleLogout}>Logout</li>
                   </ul>
                 </div>
               </div>

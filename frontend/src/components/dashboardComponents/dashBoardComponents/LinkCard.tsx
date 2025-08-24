@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Bookmark, Trash } from "lucide-react";
+import { Bookmark, Instagram, Trash } from "lucide-react";
 import { useEffect } from "react";
 
 export interface contentProps {
@@ -31,13 +31,13 @@ const LinkCard = ({
     }
   }, [link]);
   return (
-    <div className="w-[100%] bg-[#1F2937] dark:bg-[#1F2937] border border-gray-800 rounded-2xl overflow-hidden
+    <div className="w-[100%] bg-[#0F141B]  border border-gray-800 rounded-2xl overflow-hidden
      shadow-md 
     hover:shadow-lg transition-shadow duration-300">
       {contentType === "Link" && (
         <div className="">
            {type === "Youtube" && (
-            <div className="relative w-full h-[200px] p-2 bg-gradient-to-r from-[#FF0000] to-[#CC0000]">
+            <div className="relative w-full h-[200px] bg-gradient-to-r ">
               <iframe
                 width="100%"
                 height="100%"
@@ -57,24 +57,25 @@ const LinkCard = ({
           )}
 
           {type === "Instagram" && (
-            <div className="bg-white  bg-gradient-to-t flex justify-center p-2 items-center from-[#FFC200] via-[#FF5123] to-[#D300C5] ">
-              <blockquote
+            <div className="bg-[#1B2028] text-white/60  bg-gradient-to-t flex justify-center p-14 py-[88px] items-center">
+              {/* <blockquote
                 className="instagram-media"
                 data-instgrm-permalink={link.replace("reels", "reel")}
                 data-instgrm-version="14"
                 style={{ margin: "0 auto", width:"100%" }}
-              ></blockquote>
+              ></blockquote> */}
+              <Instagram />
             </div>
           )}
 
           {type === "Other" && (
-            <div className="relative w-full h-[200px] p-2">
+            <div className="relative w-full h-[200px] p-2 overflow-hidden">
               <iframe
                 width="100%"
                 height="100%"
                 src={link}
                 title="YouTube video player"
-                className="w-full h-full rounded-t-2xl"
+                className="w-full h-full rounded-t-2xl overflow-hidden"
               ></iframe>
             </div>
           )}

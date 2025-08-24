@@ -8,12 +8,14 @@ import type { RootState } from "../main";
 // import { getUser } from "../services/operations/auth";
 // import { setUserContent } from "../redux/slices/commonStates";
 import { useSelector } from "react-redux";
+import SidebarProfile from "../components/ui/SidebarProfile";
+import useGetUser from "../services/getUserHook";
 
 
 
 const Dashboard = () => {
-
-
+   useGetUser();
+  // window.location.reload();
   const stateDialog = useSelector((state: RootState) => state.commonState.dialogState);
   
   return (
@@ -27,11 +29,11 @@ const Dashboard = () => {
       <Sidebar />
 
       
-      <div className="md:ml-[192px] ml-[45px] w-full h-[91vh] mt-[9vh]  ">
+      <div className="md:ml-[192px] ml-[45px] md:mr-[270px] w-full h-[91vh] mt-[9vh]  ">
         <Outlet />
       </div>
 
-      {/* <SidebarProfile /> */}
+      <SidebarProfile />
       
     </div>
   );

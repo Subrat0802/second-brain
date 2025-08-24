@@ -10,7 +10,7 @@ const useGetUser = () => {
   const refreshUser = useCallback(async () => {
     try {
       const response = await getUser();
-      dispatch(setUserContent(response.data?.data.content));
+      dispatch(setUserContent(response.data?.data));
     } catch (error) {
       console.error("Failed to fetch user:", error);
     }

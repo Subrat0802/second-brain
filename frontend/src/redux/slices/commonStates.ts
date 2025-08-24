@@ -1,6 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
+
+interface User {
+  username?: string;
+  email?: string;
+  [key: string]: unknown;
+}
+
+interface CommonState {
+  dialogState: boolean;
+  userContent: User | null;
+}
+
+
+const initialState: CommonState = {
     dialogState: false,
     userContent: null
 }
