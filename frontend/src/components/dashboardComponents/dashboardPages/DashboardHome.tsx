@@ -28,16 +28,16 @@ const DashboardHome = () => {
       </div>
 
       <div className=" w-full mt-10 flex gap-2">
-        {/* <InputTag placeText="Search your content here..." labelText={""} id={""} type={""}/> */}
-        {/* <div className="flex gap-2 flex-wrap">
-          <Button text="Last 24 hours" variant="primary"/>
-          <Button text="Instagram" variant="primary"/>
-          <Button text="Youtube" variant="primary"/>
-          <Button text="Twitter" variant="primary"/>
+        
+        <div className="flex gap-2 flex-wrap">
+          <Button text="Last 24 hours" variant="fourth" size="xs"/>
+          <Button text="Instagram" variant="fourth" size="xs"/>
+          <Button text="Youtube" variant="fourth" size="xs"/>
+          <Button text="Twitter" variant="fourth" size="xs"/>
+          <Button text="Other" variant="fourth" size="xs"/>
           <div className="">
-
           </div>
-        </div> */}
+        </div>
       </div>
 
       {/* all posts  */}

@@ -68,7 +68,7 @@ export const signin = async ({ email, password }: signinProps) => {
 
     throw serverError; 
   } else {
-    console.error("Signin ERROR: Network/Unknown", error);
+    console.error("Signin ERROR", error);
     toast.error("Network error. Please try again later.");
     throw { message: "Something went wrong. Please try again later." };
   }

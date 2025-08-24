@@ -5,8 +5,8 @@ export interface ButtonProps {
   text?: string;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
-  variant?: "primary" | "secondary" | "tertiary";
-  size?: "sm" | "md" | "lg";
+  variant?: "primary" | "secondary" | "tertiary" | "fourth";
+  size?: "sm" | "md" | "lg" | "xs";
   onClick?: () => void;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
@@ -22,13 +22,15 @@ const variantStyle = {
 
   tertiary:
     "flex items-center justify-center font-medium rounded-lg border transition-all duration-200 py-1 px-2 md:p-3 md:px-9 border-gray-300 text-[#080C13] dark:text-[#7F7F7F] dark:border-[#7F7F7F] hover:bg-gray-100 dark:hover:bg-[#090e16] dark:hover:border-[#c5c5c5] dark:hover:text-[#c5c5c5]",
-};
+  fourth: "border dark:border-white/30 rounded-full p-1 px-2 text-sm "
+  };
 
 
 const sizeStyle = {
   sm: "w-fit min-h-[32px]",
   md: "min-w-44 min-h-[40px]",
   lg: "min-w-56 min-h-[48px]",
+  xs: ""
 };
 
 const Button = ({

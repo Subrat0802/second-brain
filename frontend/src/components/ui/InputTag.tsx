@@ -1,15 +1,16 @@
 import React from "react";
 
 export interface propItems {
-  labelText: string;
+  labelText?: string;
   placeText: string;
   id: string;
   type: string;
-  onChange?:() => void
+  onChange?:() => void,
+  classStyle?: string
 }
 
 const InputTag = React.forwardRef<HTMLInputElement, propItems>(
-  ({ labelText, placeText, id, type, onChange }, ref) => {
+  ({ labelText, placeText, id, type, onChange, classStyle }, ref) => {
     return (
       <div className="flex flex-col">
         <label htmlFor={id}>{labelText}</label>
@@ -17,7 +18,7 @@ const InputTag = React.forwardRef<HTMLInputElement, propItems>(
           ref={ref}
           placeholder={placeText}
           id={id}
-          className="dark:bg-[#374151] rounded-lg p-2 border border-black dark:border-[#374151]"
+          className={`dark:bg-[#1F2937] p-2 border border-black dark:border-[#374151] ${classStyle ? classStyle : "rounded-lg"}`}
           type={type}
           onChange={onChange}
         />

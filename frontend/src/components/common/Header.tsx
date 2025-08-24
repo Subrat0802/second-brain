@@ -5,6 +5,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../main";
 import { useEffect, useState } from "react";
+import InputTag from "../ui/InputTag";
 
 const Header = () => {
   const [token, setToken] = useState("");
@@ -53,7 +54,7 @@ const Header = () => {
             </p>
           </div>
         </NavLink>
-        <div className="md:flex gap-6 hidden  justify-center items-center font-medium text-lg text-[#4B5563] dark:text-[#7F7F7F]">
+        <div className={`md:flex gap-6 hidden  justify-center items-center font-medium text-lg text-[#4B5563] dark:text-[#7F7F7F] ${token ? "pl-24" : "pl-0"}`}>
           <p>Dashboard</p>
           <p>Collections</p>
           <p>Explore</p>
@@ -62,7 +63,10 @@ const Header = () => {
           {/* <Button text="Add Link" startIcon={<Plus />} varient="primary" size="sm"/> */}
 
           {token ? (
-            <div className="flex justify-center items-center gap-4">
+            <div className="flex justify-center items-center gap-4 ">
+              <div>
+                <InputTag type="text" placeText="Search Your Content." classStyle="rounded-full" id="search"/>
+              </div>
               <Bell />
               <div className="relative cursor-pointer" onClick={handleOnMouseOver}  >
                 <div className="" >

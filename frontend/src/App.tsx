@@ -15,6 +15,7 @@ import Auth from "./pages/Auth";
 import Signup from "./components/authComponents/Signup";
 import Signin from "./components/authComponents/Signin";
 import ProtectedRoute from "./services/ProtectedRoute";
+import Footer from "./components/common/Footer";
 
 function App() {
   
@@ -41,6 +42,7 @@ function App() {
         </Route>
         <Route path="/test" element={<Test />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

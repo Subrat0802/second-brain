@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Bookmark, Instagram, Trash } from "lucide-react";
+import { Bookmark, Instagram, Send, Trash } from "lucide-react";
 import { useEffect } from "react";
 
 export interface contentProps {
@@ -31,12 +31,14 @@ const LinkCard = ({
     }
   }, [link]);
   return (
-    <div className="w-[100%] bg-[#0F141B]  border border-gray-800 rounded-2xl overflow-hidden
+    <div
+      className="w-[100%] bg-[#0F141B]  border border-gray-800 rounded-2xl overflow-hidden
      shadow-md 
-    hover:shadow-lg transition-shadow duration-300">
+    hover:shadow-lg transition-shadow duration-300"
+    >
       {contentType === "Link" && (
         <div className="">
-           {type === "Youtube" && (
+          {type === "Youtube" && (
             <div className="relative w-full h-[200px] bg-gradient-to-r ">
               <iframe
                 width="100%"
@@ -90,10 +92,16 @@ const LinkCard = ({
 
             {/* Actions */}
             <div className="flex justify-between items-center pt-2">
-              <button className="p-1 hover:text-yellow-400 transition-colors">
-                <Bookmark size={18} />
-              </button>
-              <button className="p-1 hover:text-red-500 transition-colors">
+              <div>
+                <button className="p-1 hover:text-white transition-colors">
+                  <Bookmark size={18} />
+                </button>
+                <button className="p-1 hover:text-white transition-colors">
+                  <Send size={18} />
+                </button>
+              </div>
+
+              <button className="p-1 hover:text-white transition-colors">
                 <Trash size={18} />
               </button>
             </div>
