@@ -29,6 +29,7 @@
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.17.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "zod": "^4.1.1"
   }
 }

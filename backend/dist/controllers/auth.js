@@ -17,24 +17,26 @@ const user_1 = require("../models/user");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const zod_1 = require("zod");
+const zodValidation_1 = require("../config/zodValidation");
 dotenv_1.default.config();
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { username, email, password, conPassword } = req.body;
-        if (!username || !email || !password) {
+        const { email, password, username, conPassword } = yield zodValidation_1.signupValidation.parseAsync(req.body);
+        if (!username || !email || !password || !conPassword) {
             return res.status(400).json({
                 message: "All fields are required",
                 success: false,
             });
         }
         if (password != conPassword) {
-            return res.status(408).json({
-                message: "Wrong password, password does not match"
+            return res.status(422).json({
+                message: "Wrong password, password does not match",
             });
         }
         const user = yield user_1.userModel.findOne({ email });
         if (user) {
-            return res.status(402).json({
+            return res.status(409).json({
                 message: "User is already registered, try with different email address.",
                 success: false,
             });
@@ -46,7 +48,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             password: hashedPassword,
         });
         if (!createUser) {
-            return res.status(401).json({
+            return res.status(501).json({
                 message: "User does not created, please try again.",
                 success: false,
             });
@@ -58,6 +60,14 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     catch (err) {
+        if (err instanceof zod_1.ZodError) {
+            return res.status(400).json({
+                errors: err.issues.map((e) => ({
+                    path: e.path.join("."),
+                    message: e.message,
+                })),
+            });
+        }
         let errorMessage = "Something went wrong, server!";
         if (err instanceof Error) {
             errorMessage = err.message;
@@ -72,7 +82,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.signup = signup;
 const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { email, password } = req.body;
+        const { email, password } = yield zodValidation_1.signinValidation.parseAsync(req.body);
         if (!email || !password) {
             return res.status(400).json({
                 message: "All fields are required.",
@@ -103,16 +113,24 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             message: "User login successfully",
             success: true,
             data: findUser,
-            token: token
+            token: token,
         });
     }
     catch (err) {
+        if (err instanceof zod_1.ZodError) {
+            return res.status(400).json({
+                errors: err.issues.map((e) => ({
+                    path: e.path.join("."),
+                    message: e.message,
+                })),
+            });
+        }
         let errorMessage = "Something went wrong, server!";
         if (err instanceof Error) {
             errorMessage = err.message;
         }
         return res.status(500).json({
-            message: "Server error while login.",
+            message: "Internal server error please try again.",
             success: false,
             error: errorMessage,
         });
@@ -126,12 +144,12 @@ const getUserData = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const userData = yield user_1.userModel.findById(id).populate("content").exec();
         if (!userData) {
             return res.status(404).json({
-                message: "user not found, please re-login."
+                message: "user not found, please re-login.",
             });
         }
         return res.status(200).json({
             message: "All user Data",
-            data: userData
+            data: userData,
         });
     }
     catch (error) {

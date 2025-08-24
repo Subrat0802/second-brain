@@ -4,32 +4,36 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import cookie from "cookie-parser";
+import { parseAsync, ZodError } from "zod";
+import { signinValidation, signupValidation } from "../config/zodValidation";
 
 dotenv.config();
 
 export const signup = async (req: Request, res: Response) => {
   try {
-    const { username, email, password, conPassword } = req.body;
-    
-    if (!username || !email || !password) {
+    const { email, password, username, conPassword } =
+      await signupValidation.parseAsync(req.body);
+
+    if (!username || !email || !password || !conPassword) {
       return res.status(400).json({
         message: "All fields are required",
         success: false,
       });
     }
 
-    if(password != conPassword) {
-      return res.status(408).json({
-        message:"Wrong password, password does not match"
-      })
+    if (password != conPassword) {
+      return res.status(422).json({
+        message: "Wrong password, password does not match",
+      });
     }
 
     const user = await userModel.findOne({ email });
 
     if (user) {
-      return res.status(402).json({
-        message:"User is already registered, try with different email address.",
-          success: false,
+      return res.status(409).json({
+        message:
+          "User is already registered, try with different email address.",
+        success: false,
       });
     }
 
@@ -42,7 +46,7 @@ export const signup = async (req: Request, res: Response) => {
     });
 
     if (!createUser) {
-      return res.status(401).json({
+      return res.status(501).json({
         message: "User does not created, please try again.",
         success: false,
       });
@@ -54,10 +58,20 @@ export const signup = async (req: Request, res: Response) => {
       success: true,
     });
   } catch (err: unknown) {
+    if (err instanceof ZodError) {
+      return res.status(400).json({
+        errors: err.issues.map((e) => ({
+          path: e.path.join("."),
+          message: e.message,
+        })),
+      });
+    }
+
     let errorMessage = "Something went wrong, server!";
     if (err instanceof Error) {
       errorMessage = err.message;
     }
+
     return res.status(500).json({
       message: "Internal server error please try again.",
       success: false,
@@ -68,7 +82,7 @@ export const signup = async (req: Request, res: Response) => {
 
 export const signin = async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = await signinValidation.parseAsync(req.body);
     if (!email || !password) {
       return res.status(400).json({
         message: "All fields are required.",
@@ -94,8 +108,8 @@ export const signin = async (req: Request, res: Response) => {
 
     const token = jwt.sign(
       { email: findUser.email, id: findUser._id },
-      process.env.JWT_SECRET as string, 
-      { expiresIn: "24h" } 
+      process.env.JWT_SECRET as string,
+      { expiresIn: "24h" }
     );
 
     const options = {
@@ -109,40 +123,46 @@ export const signin = async (req: Request, res: Response) => {
       message: "User login successfully",
       success: true,
       data: findUser,
-      token:token
+      token: token,
     });
-  } catch (err) {
+  } catch (err: unknown) {
+    if (err instanceof ZodError) {
+      return res.status(400).json({
+        errors: err.issues.map((e) => ({
+          path: e.path.join("."),
+          message: e.message,
+        })),
+      });
+    }
+
     let errorMessage = "Something went wrong, server!";
     if (err instanceof Error) {
       errorMessage = err.message;
     }
 
     return res.status(500).json({
-      message: "Server error while login.",
+      message: "Internal server error please try again.",
       success: false,
       error: errorMessage,
     });
   }
 };
 
-
-export const getUserData = async (req:Request , res:Response) => {
-  try{
+export const getUserData = async (req: Request, res: Response) => {
+  try {
     //@ts-ignore
-    const {id} = req?.user;
+    const { id } = req?.user;
     const userData = await userModel.findById(id).populate("content").exec();
-    if(!userData){
+    if (!userData) {
       return res.status(404).json({
-        message:"user not found, please re-login."
-      })
+        message: "user not found, please re-login.",
+      });
     }
     return res.status(200).json({
-      message:"All user Data",
-      data:userData
-    })
-
-
-  }catch(error){
+      message: "All user Data",
+      data: userData,
+    });
+  } catch (error) {
     let errorMessage = "Something went wrong, server!";
     if (error instanceof Error) {
       errorMessage = error.message;
@@ -153,4 +173,4 @@ export const getUserData = async (req:Request , res:Response) => {
       error: errorMessage,
     });
   }
-}
+};

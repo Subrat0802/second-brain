@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { endpoint } from "../api";
 import { apiConnector } from "../apiConnector";
 
@@ -15,12 +16,7 @@ export interface signinProps {
   password: string;
 }
 
-export const signup = async ({
-  username,
-  email,
-  password,
-  conPassword,
-}: signupProps) => {
+export const signup = async ({ username, email, password, conPassword }: signupProps) => {
   try {
     const response = await apiConnector("POST", SIGNUP_API, {
       username,
@@ -28,14 +24,24 @@ export const signup = async ({
       password,
       conPassword,
     });
-    console.log("SIGNUP RESPONSE", response);
 
+    console.log("SIGNUP RESPONSE", response);
     return response;
-  } catch (error) {
-    console.error(error);
-    throw error;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    // Check if error is from server
+    if (error.response && error.response.data) {
+      console.error("SIGNUP ERROR:", error.response.data.errors[0].message);
+      toast.error(error.response.data.errors[0].message);
+      throw error.response.data;   // server error message
+    } else {
+      console.error("SIGNUP ERROR: Network/Unknown", error);
+      throw { message: "Something went wrong. Please try again later." }; // fallback error
+    }
   }
 };
+
 
 export const signin = async ({ email, password }: signinProps) => {
   try {
@@ -45,10 +51,28 @@ export const signin = async ({ email, password }: signinProps) => {
     });
     console.log(response);
     return response;
-  } catch (error) {
-    console.log(error);
-    throw error;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+  if (error.response && error.response.data) {
+    const serverError = error.response.data;
+
+    console.error("Signin ERROR:", serverError.message);
+
+    const zodMsg = serverError?.errors?.[0]?.message; 
+    const errorMsg = serverError?.message;
+
+    const finalMessage = zodMsg || errorMsg || "Something went wrong. Please try again.";
+
+    console.log("ERROR DEBUG:", errorMsg, zodMsg);
+    toast.error(finalMessage);
+
+    throw serverError; 
+  } else {
+    console.error("Signin ERROR: Network/Unknown", error);
+    toast.error("Network error. Please try again later.");
+    throw { message: "Something went wrong. Please try again later." };
   }
+}
 };
 
 export const getUser = async () => {
