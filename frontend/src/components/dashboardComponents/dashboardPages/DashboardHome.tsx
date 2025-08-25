@@ -54,6 +54,7 @@ const DashboardHome = () => {
             type={el.type}
             link={el.link}
             createdAt={el.createdAt}
+            image={el.image}
           />  
 
           </div>

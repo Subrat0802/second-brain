@@ -55,7 +55,7 @@ const Signin = () => {
           placeText="Password"
           labelText="Password:"
           id="password"
-          type="text"
+          type="password"
           onChange={handleChange}
         />
 

@@ -62,7 +62,7 @@ const Signup = () => {
           placeText="Password"
           labelText="Password:"
           id="password"
-          type="text"
+          type="password"
         />
         <InputTag
           onChange={handleChange}
@@ -70,7 +70,7 @@ const Signup = () => {
           placeText="Confirm Password"
           labelText="Confirm Password:"
           id="conPassword"
-          type="text"
+          type="password"
         />
         <Button text="Sign Up" variant="tertiary" size="lg" type="submit"/>
       </form>

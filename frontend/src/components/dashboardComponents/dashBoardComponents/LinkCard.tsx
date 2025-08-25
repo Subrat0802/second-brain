@@ -10,6 +10,7 @@ export interface contentProps {
   type: string;
   createdAt: string;
   link: string;
+  image:string
 }
 
 const LinkCard = ({
@@ -19,6 +20,7 @@ const LinkCard = ({
   type,
   createdAt,
   link,
+  image
 }: contentProps) => {
   useEffect(() => {
     //@ts-ignore
@@ -82,6 +84,10 @@ const LinkCard = ({
             </div>
           )}
 
+          {
+
+          }
+
           {/* Content Info */}
           <div className="p-3 space-y-1">
             <p className="text-sm font-medium text-white">{title}</p>
@@ -108,6 +114,12 @@ const LinkCard = ({
           </div>
         </div>
       )}
+
+      {
+        contentType === "Image" && <div>
+          <img src={image}/>  
+        </div>
+      }
     </div>
   );
 };

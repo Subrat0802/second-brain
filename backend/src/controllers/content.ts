@@ -1,23 +1,40 @@
 import { Request, Response } from "express";
 import { contentModel } from "../models/content";
 import { userModel } from "../models/user";
+import { uploadImageToCloudinary } from "../utils/imageUpload";
+import { FileArray } from "express-fileupload";
 
-export const createContent = async (req: Request, res: Response) => {
+export interface AuthRequest extends Request {
+  user?: { id: string };
+  files?: any;  
+}
+
+export const createContent = async (req: AuthRequest, res: Response) => {
   try {
-    //@ts-ignore
-    const {id} = req.user;
-    let payload: any = {};
-    const { contentType, link, title, description, type, tag, image } = req.body;
+    const {id} = req.user || {}; 
+    const { contentType, link, title, description, type, tag } = req.body;
+    const image = req.files?.image;
+    // console.log("FILEE", image, title, description, contentType);
 
     if (!title || !description || !contentType) {
       return res.status(400).json({ message: "Content type, Title and description are required" });
     }
 
+    let payload: any = {
+      title,
+      description,
+      contentType
+    }
+
     if (contentType === "Link") {
-      payload = { contentType, link, title, description, type, tag };
+      // payload = { contentType, link, title, description, type, tag };
+      payload.link = link;
+      payload.type = type;
     } 
-    else if (contentType === "Image") {
-      payload = { contentType, title, description, image };
+    else if (contentType === "Image" && req.files?.image) {
+      const uploadImage = await uploadImageToCloudinary(req.files?.image, process.env.FOLDER_NAME, 800, 60);
+      // payload = { contentType, title, description, image };
+      payload.image = uploadImage.secure_url;
     } 
     else if (contentType === "Notes"){
       payload = { contentType, title, description };

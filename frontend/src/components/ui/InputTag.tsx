@@ -5,28 +5,34 @@ export interface propItems {
   placeText: string;
   id: string;
   type: string;
-  onChange?:() => void,
-  classStyle?: string
+  name?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // FIXED
+  classStyle?: string;
+  value?: string; // make optional because file inputs can’t use value
 }
 
 const InputTag = React.forwardRef<HTMLInputElement, propItems>(
-  ({ labelText, placeText, id, type, onChange, classStyle }, ref) => {
+  ({ labelText, placeText, id, type, onChange, classStyle, value, name }, ref) => {
     return (
       <div className="flex flex-col">
-        <label htmlFor={id}>{labelText}</label>
+        {labelText && <label htmlFor={id}>{labelText}</label>}
         <input
           ref={ref}
           placeholder={placeText}
           id={id}
-          className={`dark:bg-[#1F2937] p-2 border border-black dark:border-[#374151] ${classStyle ? classStyle : "rounded-lg"}`}
+          className={`dark:bg-[#1F2937] p-2 border border-black dark:border-[#374151] ${
+            classStyle ? classStyle : "rounded-lg"
+          }`}
           type={type}
           onChange={onChange}
+          {...(type !== "file" ? { value } : {})} // only pass value if not file
+          name={name}
         />
       </div>
     );
   }
 );
 
-InputTag.displayName = "InputTag"; // Prevents React warning in dev mode
+InputTag.displayName = "InputTag";
 
 export default InputTag;
