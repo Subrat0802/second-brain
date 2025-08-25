@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Bookmark, Instagram, Send, Trash } from "lucide-react";
 import { useEffect } from "react";
+import { getYoutubeEmbedUrl } from "../../../services/youtubeEmabaded";
 
 export interface contentProps {
   contentType: string;
@@ -45,7 +46,7 @@ const LinkCard = ({
               <iframe
                 width="100%"
                 height="100%"
-                src={link.replace("watch?v=", "embed/")}
+                src={getYoutubeEmbedUrl(link)}
                 title="YouTube video player"
                 className="w-full h-full rounded-t-2xl"
               ></iframe>
@@ -118,6 +119,57 @@ const LinkCard = ({
       {
         contentType === "Image" && <div>
           <img src={image}/>  
+          <div className="p-3 space-y-1">
+            <p className="text-sm font-medium text-white">{title}</p>
+            <p className="text-xs text-gray-400">{description}</p>
+            <p className="text-xs text-gray-500">
+              Created At: {new Date(createdAt).toLocaleString()}
+            </p>
+
+            {/* Actions */}
+            <div className="flex justify-between items-center pt-2">
+              <div>
+                <button className="p-1 hover:text-white transition-colors">
+                  <Bookmark size={18} />
+                </button>
+                <button className="p-1 hover:text-white transition-colors">
+                  <Send size={18} />
+                </button>
+              </div>
+
+              <button className="p-1 hover:text-white transition-colors">
+                <Trash size={18} />
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+
+      {
+        contentType === "Notes" && <div className="p-2">
+         <div className="p-3 space-y-1">
+            <p className="text-sm font-medium text-white">{title}</p>
+            <p className="text-xs text-gray-400">{description}</p>
+            <p className="text-xs text-gray-500">
+              Created At: {new Date(createdAt).toLocaleString()}
+            </p>
+
+            {/* Actions */}
+            <div className="flex justify-between items-center pt-2">
+              <div>
+                <button className="p-1 hover:text-white transition-colors">
+                  <Bookmark size={18} />
+                </button>
+                <button className="p-1 hover:text-white transition-colors">
+                  <Send size={18} />
+                </button>
+              </div>
+
+              <button className="p-1 hover:text-white transition-colors">
+                <Trash size={18} />
+              </button>
+            </div>
+          </div> 
         </div>
       }
     </div>

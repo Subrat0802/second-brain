@@ -19,7 +19,7 @@ const createContent = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const { id } = req.user || {};
         const { contentType, link, title, description, type, tag } = req.body;
         const image = (_a = req.files) === null || _a === void 0 ? void 0 : _a.image;
-        console.log("FILEE", image, title, description, contentType);
+        // console.log("FILEE", image, title, description, contentType);
         if (!title || !description || !contentType) {
             return res.status(400).json({ message: "Content type, Title and description are required" });
         }
@@ -34,7 +34,6 @@ const createContent = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             payload.type = type;
         }
         else if (contentType === "Image" && ((_b = req.files) === null || _b === void 0 ? void 0 : _b.image)) {
-            //@ts-ignore
             const uploadImage = yield (0, imageUpload_1.uploadImageToCloudinary)((_c = req.files) === null || _c === void 0 ? void 0 : _c.image, process.env.FOLDER_NAME, 800, 60);
             // payload = { contentType, title, description, image };
             payload.image = uploadImage.secure_url;

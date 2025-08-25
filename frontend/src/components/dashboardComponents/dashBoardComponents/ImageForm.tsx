@@ -22,7 +22,7 @@ const ImageForm = () => {
 
     setImageForm((prev) => ({
       ...prev,
-      [name]: files ? files[0] : value, // if it's file input → files[0]
+      [name]: files ? files[0] : value, 
     }));
   };
 
@@ -39,7 +39,7 @@ const ImageForm = () => {
       const res = await fetch("http://localhost:3001/api/v1/content/create", {
         method: "POST",
         body: formData,
-        credentials: "include", // if using cookies for auth
+        credentials: "include", 
       });
 
       const data = await res.json();
