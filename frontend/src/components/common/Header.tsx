@@ -2,10 +2,12 @@ import { Bell, Brain, Menu, User } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import Button from "../ui/Button";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../main";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import InputTag from "../ui/InputTag";
+import { setFilterAndSearchText } from "../../redux/slices/commonStates";
+
 
 const Header = () => {
   const [token, setToken] = useState("");
@@ -15,6 +17,7 @@ const Header = () => {
   const path = pathname.split("/");
   const navigate = useNavigate();
   const t1 = useSelector((state: RootState) => state.authState.token);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setToken(t1);
@@ -28,16 +31,20 @@ const Header = () => {
   }
 
   const handleLogout = () => {
-  // expire the cookie
-  document.cookie =
-    "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 
   console.log("Token cleared");
   navigate("/")
-  window.location.reload(); // optional: refresh page
+  window.location.reload(); 
 };
 
-  return (
+  function handleChange(e: ChangeEvent<HTMLInputElement>): void {
+    dispatch(setFilterAndSearchText(e.target.value));
+  }
+
+  // const filterAndSearchText = useSelector((state: RootState) => state.commonState.filterAndSearchText);
+
+   return (
     <div
       className={`h-[9vh] ${
         path[1] === "dashboard" && "border-b-2 "
@@ -65,7 +72,7 @@ const Header = () => {
           {token ? (
             <div className="flex justify-center items-center gap-4 ">
               <div>
-                <InputTag type="text" placeText="Search Your Content." classStyle="rounded-full" id="search"/>
+                <InputTag type="text" placeText="Search Your Content." classStyle="rounded-full" id="search" onChange={handleChange}/>
               </div>
               <Bell />
               <div className="relative cursor-pointer" onClick={handleOnMouseOver}  >

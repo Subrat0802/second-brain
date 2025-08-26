@@ -7,7 +7,7 @@ export interface ButtonProps {
   endIcon?: ReactNode;
   variant?: "primary" | "secondary" | "tertiary" | "fourth";
   size?: "sm" | "md" | "lg" | "xs";
-  onClick?: () => void;
+  onClick?: () => void; 
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
   ariaLabel?: string; 

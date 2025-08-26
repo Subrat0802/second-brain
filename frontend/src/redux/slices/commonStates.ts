@@ -10,12 +10,16 @@ interface User {
 interface CommonState {
   dialogState: boolean;
   userContent: User | null;
+  filterAndSearchText: string;
+  showContent: string
 }
 
 
 const initialState: CommonState = {
     dialogState: false,
-    userContent: null
+    userContent: null,
+    filterAndSearchText: "",
+    showContent: "rows"
 }
 
 const commonSlice = createSlice({
@@ -27,9 +31,15 @@ const commonSlice = createSlice({
         },
         setUserContent(state, value){
             state.userContent = value.payload
+        },
+        setFilterAndSearchText(state, value){
+            state.filterAndSearchText = value.payload
+        },
+        setShowContent(state, value) {
+            state.showContent = value.payload
         }
     }
 })
 
-export const {setDialogState, setUserContent} = commonSlice.actions;
+export const {setDialogState, setUserContent, setFilterAndSearchText, setShowContent} = commonSlice.actions;
 export default commonSlice.reducer;
