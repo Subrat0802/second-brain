@@ -3,6 +3,8 @@
 import { Bookmark, Send, Trash } from "lucide-react";
 import { useEffect } from "react";
 import { getYoutubeEmbedUrl } from "../../services/youtubeEmabaded";
+import { setSaveContent } from "../../redux/slices/commonStates";
+import { useDispatch } from "react-redux";
 
 
 export interface ContentProps {
@@ -13,9 +15,10 @@ export interface ContentProps {
   createdAt: string;
   link: string;
   image?: string;
+  id: string;
 }
 
-const EmbeddedContent = ({contentType, title, description, type, createdAt, link, image}: ContentProps) => {
+const EmbeddedContent = ({contentType, title, description, type, createdAt, link, image, id}: ContentProps) => {
   useEffect(() => {
     //@ts-ignore
     if (window.instgrm) {
@@ -26,6 +29,8 @@ const EmbeddedContent = ({contentType, title, description, type, createdAt, link
       (window as any).twttr.widgets.load();
     }
   }, [link]);
+
+  const dispatch = useDispatch();
 
   const renderContentByType = () => {
     switch (type) {
@@ -105,7 +110,7 @@ const EmbeddedContent = ({contentType, title, description, type, createdAt, link
 
             <div className="flex justify-between items-center pt-2">
               <div>
-                <button
+                <button onClick={() => dispatch(setSaveContent(id))} 
                   aria-label="Bookmark"
                   className="p-1 hover:text-white transition-colors"
                 >

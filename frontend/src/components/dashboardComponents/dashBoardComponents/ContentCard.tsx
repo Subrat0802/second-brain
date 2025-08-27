@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../main";
 import GridContent from "../../ui/GridContent";
-import type { Key } from "react";
 import EmabadedContent from "../../ui/EmabadedContent";
 
 export const ContentCard = () => {
@@ -23,7 +22,7 @@ export const ContentCard = () => {
         contentShowType === "grid" && "grid grid-cols-3 gap-4 mt-5"
       } 
                     ${contentShowType === "rows" && "flex flex-col gap-3 mt-5"}
-                    ${contentShowType === "eye" && "grid grid-cols-2 gap-20 w-fit mx-auto mt-5 "}
+                    ${contentShowType === "eye" && "grid md:grid-cols-2 gap-20 w-fit mx-auto mt-5 "}
                     `}
     >
       {
@@ -52,7 +51,7 @@ export const ContentCard = () => {
             )
             .map(
               (el: {
-                _id: Key | null | undefined;
+                _id: string;
                 contentType: string;
                 title: string;
                 description: string;
@@ -72,6 +71,7 @@ export const ContentCard = () => {
                       createdAt={el.createdAt}
                       image={el.image}
                       contentShowType={contentShowType}
+                      id={el._id}
                     />
                   )}
                   {contentShowType === "rows" && (
@@ -84,6 +84,7 @@ export const ContentCard = () => {
                       createdAt={el.createdAt}
                       image={el.image}
                       contentShowType={contentShowType}
+                      id={el._id}
                     />
                   )}
                 
@@ -96,6 +97,7 @@ export const ContentCard = () => {
                         link={el.link}
                         createdAt={el.createdAt}
                         image={el.image}
+                        id={el._id}
                       />
                     )}
        

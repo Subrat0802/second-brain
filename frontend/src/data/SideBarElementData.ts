@@ -36,7 +36,7 @@ export const sideBarData:DataProps[] = [
         id: 5,
         title: "Images",
         Icon: Image,
-        link: "/dashboard/links",
+        link: "/dashboard/images",
     },
     {
         id: 6,

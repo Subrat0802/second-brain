@@ -8,4 +8,5 @@ export const endpoint = {
 
 export const contentEndpoint = {
     CREATE_CONTENT: BASE_URL + "/content/create",
+    SAVE_CONTENT: BASE_URL + "/content/save",
 }

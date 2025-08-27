@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
-
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 
 interface User {
   username?: string;
@@ -11,7 +10,8 @@ interface CommonState {
   dialogState: boolean;
   userContent: User | null;
   filterAndSearchText: string;
-  showContent: string
+  showContent: string;
+  saveContent: string[]
 }
 
 
@@ -19,7 +19,8 @@ const initialState: CommonState = {
     dialogState: false,
     userContent: null,
     filterAndSearchText: "",
-    showContent: "rows"
+    showContent: "rows",
+    saveContent: []
 }
 
 const commonSlice = createSlice({
@@ -37,9 +38,12 @@ const commonSlice = createSlice({
         },
         setShowContent(state, value) {
             state.showContent = value.payload
+        },
+        setSaveContent(state, value: PayloadAction<string>) {
+            state.saveContent.push(value.payload) 
         }
     }
 })
 
-export const {setDialogState, setUserContent, setFilterAndSearchText, setShowContent} = commonSlice.actions;
+export const {setDialogState, setUserContent, setFilterAndSearchText, setShowContent, setSaveContent} = commonSlice.actions;
 export default commonSlice.reducer;

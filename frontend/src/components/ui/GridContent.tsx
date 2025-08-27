@@ -1,7 +1,13 @@
 // import { getYoutubeEmbedUrl } from "../../services/youtubeEmabaded"
 // import { Bookmark, Instagram, Send, Trash } from "lucide-react"
-
-import { Bookmark, Instagram, Link, NotebookTabs, Send, Trash, Twitter, Youtube } from "lucide-react";
+import { Bookmark, BookmarkCheck, Instagram, Link, NotebookTabs, Send, Trash, Twitter, Youtube } from "lucide-react";
+import { saveContet } from "../../services/operations/content";
+import useGetUser from "../../services/getUserHook";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../main";
+// import { useDispatch } from "react-redux";
+// import { setSaveContent } from "../../redux/slices/commonStates";
+// import { saveContet } from "../../services/operations/content";
 
 export interface contentProps {
   contentType: string;
@@ -11,9 +17,17 @@ export interface contentProps {
   createdAt: string;
   link: string;
   image:string;
-  contentShowType:string
+  contentShowType:string;
+  id: string;
 }
-const GridContent = ({contentType, title, description, type, createdAt, link, image, contentShowType}: contentProps) => {
+const GridContent = ({contentType, title, description, type, createdAt, link, image, contentShowType, id}: contentProps) => {
+    const {refreshUser} = useGetUser();
+    const savedItem = useSelector((state:RootState) => state.commonState.userContent?.savedItem) || [];
+
+    const handleSaveContent = (id: string) => {
+      saveContet(id);
+      refreshUser();
+    }
   return (
     <div className={`border-gray-900 rounded-lg  ${contentShowType === "rows" ? "flex gap-2 border" : "flex flex-col border"}`}>
       {contentType === "Link" && type === "Instagram" && <div className={`${contentShowType === "rows" ? " w-[20%]" : "w-full"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
@@ -45,11 +59,14 @@ const GridContent = ({contentType, title, description, type, createdAt, link, im
             {/* Actions */}
             <div className="flex justify-between w-[100%] items-center pt-2">
               <div>
-                <button className="p-1 hover:text-white transition-colors">
-                  <Bookmark size={18} />
+                <button onClick={() => handleSaveContent(id)} className="p-1 hover:text-white transition-colors">
+                  {
+                    savedItem.includes(id) ? <BookmarkCheck size={18}/> : <Bookmark size={18} /> 
+                  }
+                  
                 </button>
                 <button className="p-1 hover:text-white transition-colors">
-                  <a href={link} target="_blank"><Send size={18} /></a>
+                  <a href={link || image} target="_blank"><Send size={18} /></a>
                 </button>
               </div>
 
@@ -65,7 +82,7 @@ const GridContent = ({contentType, title, description, type, createdAt, link, im
 
 export default GridContent
 
-// {/* <div
+// {/* <div BookmarkCheck 
 //       className="w-[100%] bg-[#0F141B]  border  border-white rounded-2xl overflow-hidden mt-10
 //      shadow-md 
 //     hover:shadow-lg transition-shadow duration-300"
