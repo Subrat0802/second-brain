@@ -4,17 +4,18 @@ import Button from "../../ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../../main";
 import {setDialogState, setFilterAndSearchText, setShowContent} from "../../../redux/slices/commonStates";
-import LinkCard from "../dashBoardComponents/LinkCard";
-import type { Key } from "react";
+import { ContentCard } from "../dashBoardComponents/ContentCard";
+// import LinkCard from "../dashBoardComponents/LinkCard";
+// import type { Key } from "react";
 
 const DashboardHome = () => {
   const dispatch = useDispatch();
   const dialogState = useSelector((state: RootState) => state.commonState.dialogState);
 
   //@ts-ignore
-  const userContent = useSelector((state: RootState) => state.commonState.userContent?.content) ?? [];
+  // const userContent = useSelector((state: RootState) => state.commonState.userContent?.content) ?? [];
 
-  const searchAndFilterText = useSelector((state: RootState) => state.commonState.filterAndSearchText) ?? "";
+  // const searchAndFilterText = useSelector((state: RootState) => state.commonState.filterAndSearchText) ?? "";
 
   const handleClickAddItem = () => {
     dispatch(setDialogState(!dialogState));
@@ -85,64 +86,7 @@ const DashboardHome = () => {
         </div>
       </div>
 
-
-      <div className="md:columns-2 columns-1 gap-6  w-full overflow-x-hidden mt-10">
-       
-          {
-            //@ts-ignore
-            userContent.length === 0 ? (
-              <p>Loading..</p>
-            ) : (
-              userContent
-                //@ts-ignore
-                .filter(
-                  (el: { type?: string;
-                    title?: string;
-                    description?: string;
-                  }) => {
-                    if (!searchAndFilterText) return true; 
-                    const type = el.type?.toLowerCase() ?? "";
-                    const title = el.title?.toLowerCase() ?? "";
-                    const desc = el.description?.toLowerCase() ?? "";
-
-                    return (
-                      type.includes(searchAndFilterText.toLowerCase()) ||
-                      title.includes(searchAndFilterText.toLowerCase()) ||
-                      desc.includes(searchAndFilterText.toLowerCase())
-                    );
-                  }
-                )
-                .map(
-                  (el: {
-                    _id: Key | null | undefined;
-                    contentType: string;
-                    title: string;
-                    description: string;
-                    type: string;
-                    link: string;
-                    createdAt: string;
-                    image: string;
-                  }) => (
-                    <div
-                      key={el._id}
-                      className="mb-9 break-inside-avoid rounded-xl w-[100%] "
-                    >
-                      <LinkCard
-                        contentType={el.contentType}
-                        title={el.title}
-                        description={el.description}
-                        type={el.type}
-                        link={el.link}
-                        createdAt={el.createdAt}
-                        image={el.image}
-                      />
-                    </div>
-                  )
-                )
-            )
-          }
-
-      </div>
+      <ContentCard />
     </div>
   );
 };
