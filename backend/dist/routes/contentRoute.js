@@ -9,3 +9,4 @@ const content_1 = require("../controllers/content");
 const middleware_1 = require("../middleware/middleware");
 exports.contentRoute = express_1.default.Router();
 exports.contentRoute.post("/create", middleware_1.isUser, content_1.createContent);
+exports.contentRoute.post("/save", middleware_1.isUser, content_1.saveContent);

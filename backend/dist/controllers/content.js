@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createContent = void 0;
+exports.saveContent = exports.createContent = void 0;
 const content_1 = require("../models/content");
 const user_1 = require("../models/user");
 const imageUpload_1 = require("../utils/imageUpload");
@@ -62,10 +62,38 @@ const createContent = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             errorMessage = error.message;
         }
         return res.status(500).json({
-            message: "Server error while login.",
+            message: "Server error while creating content.",
             success: false,
             error: errorMessage,
         });
     }
 });
 exports.createContent = createContent;
+const saveContent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { contentId } = req.body;
+        const { id } = req.user || {};
+        const user = yield user_1.userModel.findOne({ _id: id });
+        if (!user) {
+            return res.status(401).json({
+                message: "User not found, invalid credentials, please login in first."
+            });
+        }
+        if (user.savedItem.includes(contentId)) {
+            return res.status(400).json({
+                message: "Content already saved.",
+            });
+        }
+        user.savedItem.push(contentId);
+        yield user.save();
+        return res.status(200).json({
+            message: "Item saved successfully"
+        });
+    }
+    catch (error) {
+        return res.status(500).json({
+            messsage: "Server error while saving content"
+        });
+    }
+});
+exports.saveContent = saveContent;

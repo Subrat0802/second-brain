@@ -3,7 +3,7 @@ import { Grid2x2, History, Plus, Rows, ScanEye } from "lucide-react";
 import Button from "../../ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../../main";
-import {setDialogState, setFilterAndSearchText, setShowContent} from "../../../redux/slices/commonStates";
+import {setCreateCollectionState, setDialogState, setFilterAndSearchText, setShowContent} from "../../../redux/slices/commonStates";
 import { ContentCard } from "../dashBoardComponents/ContentCard";
 // import LinkCard from "../dashBoardComponents/LinkCard";
 // import type { Key } from "react";
@@ -21,6 +21,10 @@ const DashboardHome = () => {
     dispatch(setDialogState(!dialogState));
   };
 
+   const collectionState = useSelector((state: RootState) => state.commonState.createCollectionState);
+
+   console.log("collectionState", collectionState);
+
   return (
     <div className="p-4 min-h-[91vh] dark:bg-[#080C13] ">
       <div className=" flex justify-between items-center">
@@ -35,7 +39,10 @@ const DashboardHome = () => {
             startIcon={<Plus />}
             onClick={handleClickAddItem}
           />
-          <Button text="Create Collection" />
+          {
+            collectionState ? <Button text="Create" onClick={() => dispatch(setCreateCollectionState(!collectionState))}/> : 
+            <Button text="Create Collection" onClick={() => dispatch(setCreateCollectionState(!collectionState))}/>
+          }
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface User {
   username?: string;
@@ -11,39 +11,50 @@ interface CommonState {
   userContent: User | null;
   filterAndSearchText: string;
   showContent: string;
-  saveContent: string[]
+  saveContent: string[];
+  createCollectionState: boolean;
 }
-
 
 const initialState: CommonState = {
-    dialogState: false,
-    userContent: null,
-    filterAndSearchText: "",
-    showContent: "rows",
-    saveContent: []
-}
+  dialogState: false,
+  userContent: null,
+  filterAndSearchText: "",
+  showContent: "rows",
+  saveContent: [],
+  createCollectionState: false,
+};
 
 const commonSlice = createSlice({
-    name:"commonState",
-    initialState:initialState,
-    reducers: {
-        setDialogState(state, value){
-            state.dialogState = value.payload
-        },
-        setUserContent(state, value){
-            state.userContent = value.payload
-        },
-        setFilterAndSearchText(state, value){
-            state.filterAndSearchText = value.payload
-        },
-        setShowContent(state, value) {
-            state.showContent = value.payload
-        },
-        setSaveContent(state, value: PayloadAction<string>) {
-            state.saveContent.push(value.payload) 
-        }
-    }
-})
+  name: "commonState",
+  initialState: initialState,
+  reducers: {
+    setDialogState(state, value) {
+      state.dialogState = value.payload;
+    },
+    setUserContent(state, value) {
+      state.userContent = value.payload;
+    },
+    setFilterAndSearchText(state, value) {
+      state.filterAndSearchText = value.payload;
+    },
+    setShowContent(state, value) {
+      state.showContent = value.payload;
+    },
+    setSaveContent(state, value: PayloadAction<string>) {
+      state.saveContent.push(value.payload);
+    },
+    setCreateCollectionState(state, action) {
+      state.createCollectionState = action.payload;
+    },
+  },
+});
 
-export const {setDialogState, setUserContent, setFilterAndSearchText, setShowContent, setSaveContent} = commonSlice.actions;
+export const {
+  setDialogState,
+  setUserContent,
+  setFilterAndSearchText,
+  setShowContent,
+  setSaveContent,
+  setCreateCollectionState,
+} = commonSlice.actions;
 export default commonSlice.reducer;

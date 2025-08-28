@@ -4,11 +4,11 @@ export interface propItems {
   labelText?: string;
   placeText: string;
   id: string;
-  type: string;
+  type?: string;
   name?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // FIXED
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; 
   classStyle?: string;
-  value?: string; // make optional because file inputs can’t use value
+  value?: string; 
 }
 
 const InputTag = React.forwardRef<HTMLInputElement, propItems>(
@@ -25,7 +25,7 @@ const InputTag = React.forwardRef<HTMLInputElement, propItems>(
           }`}
           type={type}
           onChange={onChange}
-          {...(type !== "file" ? { value } : {})} // only pass value if not file
+          {...(type !== "file" ? { value } : {})} 
           name={name}
         />
       </div>

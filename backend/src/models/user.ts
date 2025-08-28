@@ -19,7 +19,13 @@ const userSchema = new mongoose.Schema({
     content:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Content"
-    }]
+    }],
+    savedItem:[
+        {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Content"
+        }
+    ]
 },{timestamps:true})
 
 

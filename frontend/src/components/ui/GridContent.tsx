@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // import { getYoutubeEmbedUrl } from "../../services/youtubeEmabaded"
 // import { Bookmark, Instagram, Send, Trash } from "lucide-react"
-import { Bookmark, BookmarkCheck, Instagram, Link, NotebookTabs, Send, Trash, Twitter, Youtube } from "lucide-react";
+import { Badge, BadgeCheck, Bookmark, BookmarkCheck, Instagram, Link, NotebookTabs, Send, Trash, Twitter, Youtube } from "lucide-react";
 import { saveContet } from "../../services/operations/content";
 import useGetUser from "../../services/getUserHook";
 import { useSelector } from "react-redux";
@@ -24,12 +25,26 @@ const GridContent = ({contentType, title, description, type, createdAt, link, im
     const {refreshUser} = useGetUser();
     const savedItem = useSelector((state:RootState) => state.commonState.userContent?.savedItem) || [];
 
+    const collectionState = useSelector((state:RootState) => state.commonState.createCollectionState);
+
     const handleSaveContent = (id: string) => {
       saveContet(id);
       refreshUser();
     }
   return (
-    <div className={`border-gray-900 rounded-lg  ${contentShowType === "rows" ? "flex gap-2 border" : "flex flex-col border"}`}>
+    <div className={`relative border-gray-900 rounded-lg ${collectionState && "cursor-pointer"}   ${contentShowType === "rows" ? "flex gap-2 border" : "flex flex-col border"}`}>
+
+      <div className="absolute top-[2px] left-1 text-white cursor-pointer ">
+        {
+          collectionState && <Badge width={15}/>
+        }
+        
+      </div>
+      {/* <div className="absolute top-[2px] left-1  cursor-pointer text-green-800 rounded-full ">
+        {
+          collectionState && <BadgeCheck width={15}/>
+        }
+      </div> */}
       {contentType === "Link" && type === "Instagram" && <div className={`${contentShowType === "rows" ? " w-[20%]" : "w-full"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
         <Instagram />  
       </div>}
@@ -61,6 +76,7 @@ const GridContent = ({contentType, title, description, type, createdAt, link, im
               <div>
                 <button onClick={() => handleSaveContent(id)} className="p-1 hover:text-white transition-colors">
                   {
+                    //@ts-ignore
                     savedItem.includes(id) ? <BookmarkCheck size={18}/> : <Bookmark size={18} /> 
                   }
                   
@@ -81,143 +97,3 @@ const GridContent = ({contentType, title, description, type, createdAt, link, im
 }
 
 export default GridContent
-
-// {/* <div BookmarkCheck 
-//       className="w-[100%] bg-[#0F141B]  border  border-white rounded-2xl overflow-hidden mt-10
-//      shadow-md 
-//     hover:shadow-lg transition-shadow duration-300"
-//     >
-//       {contentType === "Link" && (
-//         <div className="">
-//           {type === "Youtube" && (
-//             <div className="relative w-full h-[200px] bg-gradient-to-r ">
-//               <iframe
-//                 width="100%"
-//                 height="100%"
-//                 src={getYoutubeEmbedUrl(link)}
-//                 title="YouTube video player"
-//                 className="w-full h-full rounded-t-2xl"
-//               ></iframe>
-//             </div>
-//           )}
-
-//           {type === "X" && (
-//             <div className="p-3 bg-[#15202B]">
-//               <blockquote className="twitter-tweet" data-theme="dark">
-//                 <a href={link.replace("x.com", "twitter.com")}></a>
-//               </blockquote>
-//             </div>
-//           )}
-
-//           {type === "Instagram" && (
-//             <div className="bg-[#1B2028] text-white/60  bg-gradient-to-t flex justify-center p-14 py-[88px] items-center">
-//               {/* <blockquote
-//                 className="instagram-media"
-//                 data-instgrm-permalink={link.replace("reels", "reel")}
-//                 data-instgrm-version="14"
-//                 style={{ margin: "0 auto", width:"100%" }}
-//               ></blockquote> */}
-//               <Instagram />
-//             </div>
-//           )}
-
-//           {type === "Other" && (
-//             <div className="relative w-full h-[200px] p-2 overflow-hidden">
-//               <iframe
-//                 width="100%"
-//                 height="100%"
-//                 src={link}
-//                 title="YouTube video player"
-//                 className="w-full h-full rounded-t-2xl overflow-hidden"
-//               ></iframe>
-//             </div>
-//           )}
-
-//           {
-
-//           }
-
-//           {/* Content Info */}
-//           <div className="p-3 space-y-1">
-//             <p className="text-sm font-medium text-white">{title}</p>
-//             <p className="text-xs text-gray-400">{description}</p>
-//             <p className="text-xs text-gray-500">
-//               Created At: {new Date(createdAt).toLocaleString()}
-//             </p>
-
-//             {/* Actions */}
-//             <div className="flex justify-between items-center pt-2">
-//               <div>
-//                 <button className="p-1 hover:text-white transition-colors">
-//                   <Bookmark size={18} />
-//                 </button>
-//                 <button className="p-1 hover:text-white transition-colors">
-//                   <Send size={18} />
-//                 </button>
-//               </div>
-
-//               <button className="p-1 hover:text-white transition-colors">
-//                 <Trash size={18} />
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-
-//       {
-//         contentType === "Image" && <div>
-//           <img src={image}/>  
-//           <div className="p-3 space-y-1">
-//             <p className="text-sm font-medium text-white">{title}</p>
-//             <p className="text-xs text-gray-400">{description}</p>
-//             <p className="text-xs text-gray-500">
-//               Created At: {new Date(createdAt).toLocaleString()}
-//             </p>
-
-//             {/* Actions */}
-//             <div className="flex justify-between items-center pt-2">
-//               <div>
-//                 <button className="p-1 hover:text-white transition-colors">
-//                   <Bookmark size={18} />
-//                 </button>
-//                 <button className="p-1 hover:text-white transition-colors">
-//                   <Send size={18} />
-//                 </button>
-//               </div>
-
-//               <button className="p-1 hover:text-white transition-colors">
-//                 <Trash size={18} />
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       }
-
-//       {
-//         contentType === "Notes" && <div className="p-2">
-//          <div className="p-3 space-y-1">
-//             <p className="text-sm font-medium text-white">{title}</p>
-//             <p className="text-xs text-gray-400">{description}</p>
-//             <p className="text-xs text-gray-500">
-//               Created At: {new Date(createdAt).toLocaleString()}
-//             </p>
-
-//             {/* Actions */}
-//             <div className="flex justify-between items-center pt-2">
-//               <div>
-//                 <button className="p-1 hover:text-white transition-colors">
-//                   <Bookmark size={18} />
-//                 </button>
-//                 <button className="p-1 hover:text-white transition-colors">
-//                   <Send size={18} />
-//                 </button>
-//               </div>
-
-//               <button className="p-1 hover:text-white transition-colors">
-//                 <Trash size={18} />
-//               </button>
-//             </div>
-//           </div> 
-//         </div>
-//       }
-//     </div> */}

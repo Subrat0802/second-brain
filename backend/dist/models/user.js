@@ -54,6 +54,12 @@ const userSchema = new mongoose_1.default.Schema({
     content: [{
             type: mongoose_1.default.Schema.Types.ObjectId,
             ref: "Content"
-        }]
+        }],
+    savedItem: [
+        {
+            type: mongoose_1.default.Schema.Types.ObjectId,
+            ref: "Content"
+        }
+    ]
 }, { timestamps: true });
 exports.userModel = (0, mongoose_1.model)("User", userSchema);
