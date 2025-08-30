@@ -4,8 +4,10 @@
 import { Badge, BadgeCheck, Bookmark, BookmarkCheck, Instagram, Link, NotebookTabs, Send, Trash, Twitter, Youtube } from "lucide-react";
 import { saveContet } from "../../services/operations/content";
 import useGetUser from "../../services/getUserHook";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../main";
+import { setCollections } from "../../redux/slices/commonStates";
+import { toast } from "sonner";
 // import { useDispatch } from "react-redux";
 // import { setSaveContent } from "../../redux/slices/commonStates";
 // import { saveContet } from "../../services/operations/content";
@@ -21,46 +23,68 @@ export interface contentProps {
   contentShowType:string;
   id: string;
 }
-const GridContent = ({contentType, title, description, type, createdAt, link, image, contentShowType, id}: contentProps) => {
+const GridContent = ({contentType, title, description, type, createdAt, link, image, contentShowType, id}: 
+  contentProps) => {
+    const dispatch = useDispatch();
     const {refreshUser} = useGetUser();
     const savedItem = useSelector((state:RootState) => state.commonState.userContent?.savedItem) || [];
 
     const collectionState = useSelector((state:RootState) => state.commonState.createCollectionState);
+    const collections = useSelector((state: RootState) => state.commonState.collections);
 
     const handleSaveContent = (id: string) => {
       saveContet(id);
       refreshUser();
     }
+
+    const handleSelectCollection = (id: string) => {
+      if(!collectionState) {
+        return
+      }
+      else if(collections.length > 9){
+        return
+      }else if(collections.includes(id)){
+        toast.success("Collection already selected")
+        return
+      }
+      else{
+        dispatch(setCollections(id))
+      }
+    }
+
   return (
-    <div className={`relative border-gray-900 rounded-lg ${collectionState && "cursor-pointer"}   ${contentShowType === "rows" ? "flex gap-2 border" : "flex flex-col border"}`}>
+    <div
+      onClick={() => handleSelectCollection(id)}
+    className={`relative border-gray-900 rounded-lg ${collectionState && "cursor-pointer"}   ${contentShowType === "rows" ? "flex gap-2 border" : "flex flex-col border"}`}>
 
       <div className="absolute top-[2px] left-1 text-white cursor-pointer ">
         {
-          collectionState && <Badge width={15}/>
+          collectionState && collections.includes(id) ? <BadgeCheck width={15}/> : 
+          collectionState && <Badge width={15}/> 
         }
         
       </div>
       {/* <div className="absolute top-[2px] left-1  cursor-pointer text-green-800 rounded-full ">
         {
-          collectionState && <BadgeCheck width={15}/>
+          
         }
       </div> */}
-      {contentType === "Link" && type === "Instagram" && <div className={`${contentShowType === "rows" ? " w-[20%]" : "w-full"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
+      {contentType === "Link" && type === "Instagram" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg "}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
         <Instagram />  
       </div>}
-      {contentType === "Link" && type === "Youtube" && <div className={`${contentShowType === "rows" ? " w-[20%]" : "w-full"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
+      {contentType === "Link" && type === "Youtube" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
         <Youtube />  
       </div>}
-      {contentType === "Link" && type === "X" && <div className={`${contentShowType === "rows" ? " w-[20%]" : "w-full"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
+      {contentType === "Link" && type === "X" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
         <Twitter />  
       </div>}
-      {contentType === "Link" && type === "Other" && <div className={`${contentShowType === "rows" ? " w-[20%]" : "w-full"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
+      {contentType === "Link" && type === "Other" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
         <Link />  
       </div>}
-      {contentType === "Image" && <div className={`${contentShowType === "rows" ? " w-[20%]" : "w-full"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
-        <img className="object-cover h-[100%] w-full" src={image} />  
+      {contentType === "Image" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
+        <img className="object-cover h-[100%] w-full rounded-l-lg" src={image} />  
       </div>}
-      {contentType === "Notes" && <div className={`${contentShowType === "rows" ? " w-[20%]" : "w-full"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
+      {contentType === "Notes" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
         <NotebookTabs />  
       </div>}
 

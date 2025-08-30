@@ -13,6 +13,7 @@ interface CommonState {
   showContent: string;
   saveContent: string[];
   createCollectionState: boolean;
+  collections: string[]
 }
 
 const initialState: CommonState = {
@@ -22,6 +23,7 @@ const initialState: CommonState = {
   showContent: "rows",
   saveContent: [],
   createCollectionState: false,
+  collections: []
 };
 
 const commonSlice = createSlice({
@@ -46,6 +48,12 @@ const commonSlice = createSlice({
     setCreateCollectionState(state, action) {
       state.createCollectionState = action.payload;
     },
+    setCollections(state, action) {
+        state.collections.push(action.payload)
+    },
+    clearCollections(state) {
+        state.collections = []
+    }
   },
 });
 
@@ -56,5 +64,7 @@ export const {
   setShowContent,
   setSaveContent,
   setCreateCollectionState,
+  setCollections,
+  clearCollections
 } = commonSlice.actions;
 export default commonSlice.reducer;

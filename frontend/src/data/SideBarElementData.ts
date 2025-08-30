@@ -42,7 +42,7 @@ export const sideBarData:DataProps[] = [
         id: 6,
         title: "Collections",
         Icon: Folder,
-        link: "/dashboard/saved",
+        link: "/dashboard/collections",
     },
     {
         id: 7,

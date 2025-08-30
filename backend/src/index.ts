@@ -7,6 +7,7 @@ import cors from "cors";
 import { contentRoute } from "./routes/contentRoute";
 import { cloudinaryConnect } from "./config/cloudinaryConnect";
 import fileUpload from "express-fileupload";
+import { collectionRoute } from "./routes/collections";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ cloudinaryConnect();
 
 app.use("/api/v1/auth", authrouter);
 app.use("/api/v1/content", contentRoute );
+app.use("/api/v1/collection", collectionRoute)
 
 app.get("/", (req, res) => {
     res.send("Hi there");

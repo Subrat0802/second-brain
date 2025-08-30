@@ -1,18 +1,36 @@
-import { useSelector } from "react-redux";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../main";
 import Progressbar from "./Progressbar";
 import { Plus } from "lucide-react";
 import InputTag from "./InputTag";
 import Button from "./Button";
+import { useState, type Key } from "react";
+import { createCollection } from "../../services/operations/collection";
+import useGetUser from "../../services/getUserHook";
+import { clearCollections, setCreateCollectionState } from "../../redux/slices/commonStates";
 
 const SidebarProfile = () => {
+  const {refreshUser} = useGetUser();
+  const [collectionInputText, setCollectionInputText] = useState("");
+  const dispatch = useDispatch();
+
+  console.log("collectionInputText", collectionInputText)
+
   const userData = useSelector(
     (state: RootState) => state.commonState.userContent
   );
+  const content = useSelector(
+    (state: RootState) => state.commonState.userContent?.content
+  ) || [];
 
   const createCollectionState = useSelector(
     (state: RootState) => state.commonState.createCollectionState
   );
+
+  const collections = useSelector((state: RootState) => state.commonState.collections) || [];
+  //@ts-ignore
+  const collectionContent = content.filter((item: { _id: string; }) => collections.includes(item._id))
 
   if (!userData) {
     return (
@@ -22,9 +40,19 @@ const SidebarProfile = () => {
     );
   }
 
+  const handleSubmitCollection = async () => {
+      await createCollection({collectionName:collectionInputText,
+        description: "",
+        collections: collections
+      })
+      dispatch(clearCollections());
+      dispatch(setCreateCollectionState(false))
+      refreshUser();
+  }
+
   return (
     <div
-      className="w-[270px] px-4 font-inter fixed right-0 h-[100dvh] pt-[9dvh] border-l-2 hidden md:flex flex-col dark:border-b-2 bg-white 
+      className="w-[270px]  px-4 font-inter fixed right-0 h-[100dvh] pt-[9dvh] border-l-2 hidden md:flex flex-col dark:border-b-2 bg-white 
       dark:bg-[#080C13] dark:border-[#111827] border"
     >
       {!createCollectionState && (
@@ -63,16 +91,26 @@ const SidebarProfile = () => {
         </div>
       )}
       {createCollectionState && (
-        <div>
+        <div className="flex flex-col w-full h-full justify-center  items-center  ">
           <div className="px-auto">
-            <InputTag placeText="Collection Name" id={"collectionName"}/>
+            <InputTag placeText="Collection Name" id={"collectionName"} onChange={(e) => setCollectionInputText(e.target.value)}/>
           </div>
-          <div>
+          <div className="">
+            {
+              collectionContent.length === 0 ? <p className="text-sm">Select content</p> : <ul>
+                {
+                  collectionContent.map((el: { title: string , description: string, _id:Key}) => {
+                    return <div key={el._id} className="border flex flex-col p-1 rounded-lg my-2">
+                      <p className="text-sm">{el.title}</p>
+                    </div>
+                  })
+                }
+              </ul>
+            }
+          </div>
             
-          </div>
-
           <div className="flex items-center justify-center">
-              <Button variant="primary" text="Collection Name" />
+              <Button variant="primary" text="Collection Name" onClick={handleSubmitCollection}/>
             </div>
         </div>
       )}

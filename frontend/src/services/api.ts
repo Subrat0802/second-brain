@@ -10,3 +10,7 @@ export const contentEndpoint = {
     CREATE_CONTENT: BASE_URL + "/content/create",
     SAVE_CONTENT: BASE_URL + "/content/save",
 }
+
+export const collectionEndpoint = {
+    CREATE_COLLECTION: BASE_URL + "/collection/create"
+}

@@ -141,7 +141,14 @@ const getUserData = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     try {
         //@ts-ignore
         const { id } = req === null || req === void 0 ? void 0 : req.user;
-        const userData = yield user_1.userModel.findById(id).populate("content").exec();
+        const userData = yield user_1.userModel.findById(id).populate("content")
+            .populate("savedItem").populate({
+            path: "collections",
+            populate: [
+                { path: "collections" },
+                { path: "createdBy" }
+            ]
+        }).exec();
         if (!userData) {
             return res.status(404).json({
                 message: "user not found, please re-login.",

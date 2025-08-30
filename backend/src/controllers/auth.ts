@@ -152,7 +152,16 @@ export const getUserData = async (req: Request, res: Response) => {
   try {
     //@ts-ignore
     const { id } = req?.user;
-    const userData = await userModel.findById(id).populate("content").exec();
+    const userData = await userModel.findById(id).populate("content")
+    .populate("savedItem").populate({
+      path: "collections",
+      populate: [
+        {path: "collections"},
+        {path: "createdBy"}
+      ]
+        
+      
+  }).exec();
     if (!userData) {
       return res.status(404).json({
         message: "user not found, please re-login.",

@@ -15,7 +15,8 @@ const Images = () => {
           //@ts-ignore
           linksContent.filter((el) => el.contentType === "Image").map((el) => (
             <div key={el._id} className="">
-              <GridContent contentType={el?.contentType} title={el.title} description={el.description} type={""} createdAt={el.createdAt} link={""} image={el.image} contentShowType={"grid"} id={el._id}/>
+              <GridContent contentType={el?.contentType} title={el.title} description={el.description} 
+              type={""} createdAt={el.createdAt} link={""} image={el.image} contentShowType={"grid"} id={el._id}/>
             </div>
           ))
         }

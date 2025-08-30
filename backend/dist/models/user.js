@@ -60,6 +60,12 @@ const userSchema = new mongoose_1.default.Schema({
             type: mongoose_1.default.Schema.Types.ObjectId,
             ref: "Content"
         }
+    ],
+    collections: [
+        {
+            type: mongoose_1.default.Schema.Types.ObjectId,
+            ref: "Collections"
+        }
     ]
 }, { timestamps: true });
 exports.userModel = (0, mongoose_1.model)("User", userSchema);
