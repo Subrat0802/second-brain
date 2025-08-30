@@ -23,7 +23,7 @@ app.use((0, express_fileupload_1.default)({
     tempFileDir: "/temp"
 }));
 app.use((0, cors_1.default)({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND,
     credentials: true
 }));
 (0, dbconnect_1.dbconnect)();
