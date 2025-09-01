@@ -65,7 +65,10 @@ const CollectionCard = ({
                 }`}
               />
             </div>
+   
 
+
+   
             <span className="text-sm">{isOn ? "public" : "Private"}</span>
           </div>
         </div>
