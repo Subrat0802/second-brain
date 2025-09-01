@@ -8,7 +8,7 @@ const Links = () => {
   const linksContent = useSelector((state:RootState) => state.commonState.userContent?.content) ?? [];
 
   return (
-    <div className="p-4 font-inter bg-[#080C13]">
+    <div className="p-4 font-inter dark:bg-[#080C13]">
       <p className="text-xl py-4 pb-10">All your social media content and links</p>
 
       <div>

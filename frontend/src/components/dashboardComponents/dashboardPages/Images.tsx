@@ -7,7 +7,7 @@ const Images = () => {
 
   const linksContent = useSelector((state:RootState) => state.commonState.userContent?.content) ?? [];
   return (
-    <div className="p-3 font-inter bg-[#080C13]">
+    <div className="p-3 font-inter dark:bg-[#080C13]">
       <p className="text-xl py-4 pb-10">All Images</p>
 
       <div className="grid grid-cols-3 gap-5 ">

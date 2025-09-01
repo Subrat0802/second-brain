@@ -8,7 +8,7 @@ const Collections = () => {
   const savedItem = useSelector((state: RootState) => state.commonState.userContent?.collections) || [];
   return (
     <div className="p-4 min-h-[91vh] dark:bg-[#080C13]">
-      <p className="py-5">Collections</p>
+      <p className="py-5 text-xl">Collections</p>
       <div className="grid grid-cols-3 gap-7">
       {
         //@ts-ignore

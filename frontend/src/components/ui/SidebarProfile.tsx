@@ -69,22 +69,22 @@ const SidebarProfile = () => {
             <Progressbar />
           </div>
           <div className="flex gap-3 mt-5 text-sm text-white/50">
-            <div className="p-3 rounded-md bg-[#0F141B] text-center w-28">
+            <div className="p-3 rounded-md text-[#0F141B] bg-[#e7eaf0] dark:text-white/40 dark:bg-[#0F141B] text-center w-28">
               30 <br /> Saved items
             </div>
-            <div className="p-3 rounded-md bg-[#0F141B] text-center w-28">
+            <div className="p-3 rounded-md text-[#0F141B] bg-[#e7eaf0] dark:text-white/40 dark:bg-[#0F141B] text-center w-28">
               12 <br /> Collections
             </div>
           </div>
           <div className="flex justify-start  w-full gap-2 mt-8 flex-col text-sm ">
             <p>Quick Actions</p>
-            <div className="flex text-white/50 bg-[#0F141B] p-2 rounded-lg justify-start items-center gap-1">
+            <div className="flex text-white/50 text-[#0F141B] bg-[#e7eaf0] dark:text-white/40 dark:bg-[#0F141B] p-2 rounded-lg justify-start items-center gap-1">
               <Plus width={15} /> Add New Items
             </div>
-            <div className="flex text-white/50 bg-[#0F141B] p-2 rounded-lg justify-start items-center gap-1">
+            <div className="flex text-white/50 text-[#0F141B] bg-[#e7eaf0] dark:text-white/40 dark:bg-[#0F141B] p-2 rounded-lg justify-start items-center gap-1">
               <Plus width={15} /> Create Collections
             </div>
-            <div className="flex text-white/50 bg-[#0F141B] p-2 rounded-lg justify-start items-center gap-1">
+            <div className="flex text-white/50 text-[#0F141B] bg-[#e7eaf0] dark:text-white/40 dark:bg-[#0F141B] p-2 rounded-lg justify-start items-center gap-1">
               <Plus width={15} /> Upload Files
             </div>
           </div>

@@ -1,29 +1,39 @@
- 
 // import { Bookmark, BookmarkCheck, Send, Trash } from "lucide-react"
 
+import { useState } from "react";
+
 interface collectionProp {
-    collectionName:string;
-    description: string;
-    createdAt: string;
-    username: string;
+  collectionName: string;
+  description: string;
+  createdAt: string;
+  username: string;
 }
 
-const CollectionCard = ({collectionName, description, createdAt, username}:collectionProp) => {
-  return (
-    <div className="h-[30dvh]  border-gray-800 rounded-lg bg-gray-950">
-        <div className="h-[50%] w-full flex justify-center items-center bg-gray-800 rounded-t-lg p-3"><p>{collectionName}</p></div>
-        <div className="h-[50%] border-t border-gray-800 w-full ">
+const CollectionCard = ({
+  collectionName,
+  description,
+  createdAt,
+  username,
+}: collectionProp) => {
+  const [isOn, setIsOn] = useState(false);
 
-            <div className="p-2 flex flex-col gap-2">
-                
-                <p>{description}</p>
-                <p className="text-xs text-gray-400">Created by: {username}</p> 
-                <p className="text-xs text-gray-400">
-              Created At: {new Date(createdAt).toLocaleString()}
-            </p>
-                 
-            </div>
-            {/* <div className="flex justify-between w-[100%] items-center pt-2">
+  const toggleHandler = () => {
+    setIsOn((prev) => !prev);
+  };
+  return (
+    <div className="rounded-lg bg-[#E7EAF0] dark:bg-[#0F141B]">
+      <div className="w-full flex justify-center items-center dark:bg-[#252A31] text-white/60 bg-[#1F2937] rounded-t-lg p-3 py-10">
+        <p>{collectionName}</p>
+      </div>
+      <div className="h-[50%]  rounded-b-lg border-t border-gray-800 w-full ">
+        <div className="p-2 flex flex-col gap-2">
+          <p>{description}</p>
+          <p className="text-xs text-gray-500">Created by: {username}</p>
+          <p className="text-xs text-gray-500">
+            Created At: {new Date(createdAt).toLocaleString()}
+          </p>
+        </div>
+        {/* <div className="flex justify-between w-[100%] items-center pt-2">
               <div>
                 <button onClick={() => handleSaveContent(id)} className="p-1 hover:text-white transition-colors">
                   {
@@ -41,9 +51,27 @@ const CollectionCard = ({collectionName, description, createdAt, username}:colle
                 <Trash size={18} />
               </button>
             </div> */}
-        </div>
-    </div>
-  )
-}
+        <div className=" p-2">
+          <div className="flex items-center space-x-3">
+            <div
+              onClick={toggleHandler}
+              className={`w-8 h-4 flex items-center rounded-full   cursor-pointer transition-colors ${
+                isOn ? "bg-green-500" : "bg-gray-300"
+              }`}
+            >
+              <div
+                className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform ${
+                  isOn ? "translate-x-4" : "translate-x-0"
+                }`}
+              />
+            </div>
 
-export default CollectionCard
+            <span className="text-sm">{isOn ? "public" : "Private"}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CollectionCard;
