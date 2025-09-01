@@ -55,7 +55,7 @@ const GridContent = ({contentType, title, description, type, createdAt, link, im
   return (
     <div
       onClick={() => handleSelectCollection(id)}
-    className={`relative border-gray-900 rounded-lg ${collectionState && "cursor-pointer"}   ${contentShowType === "rows" ? "flex gap-2 border" : "flex flex-col border"}`}>
+    className={`relative dark:bg-[#0F141B] bg-[#ebeff7] shadow-md  border dark:border-none  rounded-lg ${collectionState && "cursor-pointer"}   ${contentShowType === "rows" ? "flex gap-4 " : "flex flex-col"}`}>
 
       <div className="absolute top-[2px] left-1 text-white cursor-pointer ">
         {
@@ -69,22 +69,22 @@ const GridContent = ({contentType, title, description, type, createdAt, link, im
           
         }
       </div> */}
-      {contentType === "Link" && type === "Instagram" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg "}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
+      {contentType === "Link" && type === "Instagram" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg "}  h-32  flex justify-center items-center bg-[#1F2937] dark:bg-[#252A31] text-white/70 `}>
         <Instagram />  
       </div>}
-      {contentType === "Link" && type === "Youtube" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
+      {contentType === "Link" && type === "Youtube" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center dark:bg-[#252A31] bg-[#1F2937]  text-white/70`}>
         <Youtube />  
       </div>}
-      {contentType === "Link" && type === "X" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
+      {contentType === "Link" && type === "X" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center dark:bg-[#252A31] text-white/70 bg-[#1F2937]`}>
         <Twitter />  
       </div>}
-      {contentType === "Link" && type === "Other" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
+      {contentType === "Link" && type === "Other" && <div className={`${contentShowType === "rows" ? " w-[20%]  rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center dark:bg-[#252A31] bg-[#1F2937] text-white/70`}>
         <Link />  
       </div>}
-      {contentType === "Image" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
+      {contentType === "Image" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center dark:bg-[#252A31] bg-[#1F2937] text-white/70`}>
         <img className="object-cover h-[100%] w-full rounded-l-lg" src={image} />  
       </div>}
-      {contentType === "Notes" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center bg-[#1F2937] shadow-lg`}>
+      {contentType === "Notes" && <div className={`${contentShowType === "rows" ? " w-[20%] rounded-l-lg" : "w-full rounded-t-lg"}  h-32  flex justify-center items-center dark:bg-[#252A31] bg-[#1F2937] text-white/70`}>
         <NotebookTabs />  
       </div>}
 

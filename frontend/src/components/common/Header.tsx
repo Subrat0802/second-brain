@@ -55,7 +55,7 @@ const Header = () => {
       <div className="max-w-7xl h-full mx-auto flex justify-between items-center font-inter  text-[#111827] dark:text-[#7F7F7F] py-2 ">
         <NavLink to={"/"}>
           <div className="flex justify-center gap-2 items-center ">
-            <div className="bg-[#1F2937] block p-2 md:p-3 rounded-xl">
+            <div className="bg-[#1F2937] dark:bg-[#0F141B] block p-2 md:p-3 rounded-xl">
               <Brain className="w-6 h-6 text-white dark:text-[#7F7F7F]" />
             </div>
             <p className="text-2xl md:text-3xl font-medium  tracking-tight">

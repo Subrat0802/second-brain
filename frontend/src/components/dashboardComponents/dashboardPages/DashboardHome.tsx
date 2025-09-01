@@ -86,7 +86,7 @@ const DashboardHome = () => {
           />
         </div>
 
-        <div className="flex  border border-gray-800 p-2 gap-4 rounded-lg justify-center items-center">
+        <div className="flex  border dark:border-gray-800 p-2 gap-4 rounded-lg justify-center items-center">
           <button onClick={() => dispatch(setShowContent("rows"))}><Rows width={20} /></button>
           <button onClick={() => dispatch(setShowContent("grid"))}><Grid2x2 width={20}/></button>
           <button onClick={() => dispatch(setShowContent("eye"))}><ScanEye width={20}/></button>

@@ -20,7 +20,8 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           id={id}
           placeholder={placeholder}
           rows={rows}
-          className="bg-white border dark:border-none border-black dark:bg-[#374151] rounded-xl p-2"
+          className="dark:bg-[#0f151d] p-2 rounded-lg border focus:border-white  border-[#b8c6db] dark:border-[#0f151d]  focus:outline-none 
+            focus:ring-2"
           ref={ref}
           onChange={onChange}
           value={value}

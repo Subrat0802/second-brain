@@ -20,13 +20,14 @@ const InputTag = React.forwardRef<HTMLInputElement, propItems>(
           ref={ref}
           placeholder={placeText}
           id={id}
-          className={`dark:bg-[#1F2937] p-2 border border-black dark:border-[#374151] ${
+          className={`dark:bg-[#0f151d] p-2  border focus:border-white  border-[#b8c6db] dark:border-[#0f151d]  focus:outline-none 
+            focus:ring-2 ${
             classStyle ? classStyle : "rounded-lg"
           }`}
           type={type}
           onChange={onChange}
           {...(type !== "file" ? { value } : {})} 
-          name={name}
+          name={name} 
         />
       </div>
     );
