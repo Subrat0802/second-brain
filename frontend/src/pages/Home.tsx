@@ -1,3 +1,4 @@
+// import SectionFive from "../components/homeComponents/SectionFive"
 import SectionFour from "../components/homeComponents/SectionFour"
 import SectionOne from "../components/homeComponents/SectionOne"
 import SectionThree from "../components/homeComponents/SectionThree"
@@ -10,6 +11,7 @@ const Home = () => {
         <SectionTwo />
         <SectionThree />
         <SectionFour />
+        {/* <SectionFive /> */}
     </div>
   )
 }

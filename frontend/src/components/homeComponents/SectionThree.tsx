@@ -1,6 +1,7 @@
 import { sectionThreeData } from "../../data/homeSectionThreeData"
 import SectionThreeCard from "../ui/SectionThreeCard"
-import geminiImage from "../../../public/gemini3.png"
+import { sectionThreeDataTwo } from "../../data/sectionThreeDatatwo"
+// import geminiImage from "../../../public/gemini3.png"÷
 
 
 const SectionThree = () => {
@@ -20,9 +21,17 @@ const SectionThree = () => {
                         ))
                     }
                 </div>
-                <div className=" p-2 md:w-[50%]  ">
-                    <img className="w-[100%] md:h-96 rounded-xl shadow-md border-r border-white/20" src={geminiImage}/>
+                <div className=" md:py-7 w-[100%] md:w-[50%] flex flex-col justify-center">
+                    {
+                        sectionThreeDataTwo.map((el) => (
+                            <SectionThreeCard key={el.id} title={el.title} Icon={el.Icon} description={el.description}/>
+                        ))
+                    }
                 </div>
+                {/* <div className=" p-2 md:w-[50%]"> */}
+                    
+                    {/* <img className="w-[100%] md:h-96 rounded-xl shadow-md border-r border-white/20" src={geminiImage}/> */}
+                {/* </div> */}
             </div>
         </div>
     </div>
