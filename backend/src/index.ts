@@ -31,22 +31,23 @@ const allowedOrigins = [
   "http://localhost:5173",               
   "http://localhost:3000",
 ];
-
 app.use(
   cors({
     origin: (origin, callback) => {
-      // allow server-to-server, Postman, curl
       if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error(`CORS blocked: ${origin}`));
+      if (origin === process.env.FRONTEND) {
+        return callback(null, true);
       }
+      if (origin.startsWith("http://localhost")) {
+        return callback(null, true);
+      }
+      return callback(null, true);
     },
     credentials: true,
   })
 );
+
 
 
 dbconnect();
