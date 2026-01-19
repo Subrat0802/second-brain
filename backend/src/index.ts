@@ -26,10 +26,28 @@ app.use(fileUpload({
   tempFileDir: path.join(os.tmpdir(), "second-brain-uploads")
 }))
 
-app.use(cors({
-  origin: process.env.FRONTEND,
-  credentials: true
-}))
+const allowedOrigins = [
+  process.env.FRONTEND,                 
+  "http://localhost:5173",               
+  "http://localhost:3000",
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // allow server-to-server, Postman, curl
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS blocked: ${origin}`));
+      }
+    },
+    credentials: true,
+  })
+);
+
 
 dbconnect();
 cloudinaryConnect();
