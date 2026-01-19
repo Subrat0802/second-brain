@@ -19,6 +19,7 @@ const Signup = () => {
     const email = emailRef.current?.value || "";
     const password = passwordRef.current?.value || "";
     const conPassword = conPassRef.current?.value || "";
+    console.log(username)
 
     const response = await signup({ username, email, password, conPassword });
     console.log("RESPONSE,", response);
@@ -31,14 +32,14 @@ const Signup = () => {
     }
   };
   return (
-    <div className="flex flex-col h-[100%] px-16  justify-center ">
-      <p className="text-3xl">Start Building Your Digital Mind</p>
-      <p className="italic mb-10">
+    <div className="flex flex-col h-[100%] px-4 sm:px-8 md:px-12 lg:px-16  justify-center ">
+      <p className="text-2xl sm:text-3xl">Start Building Your Digital Mind</p>
+      <p className="italic mb-6 md:mb-10 text-sm sm:text-base">
         Sign up to create your personal hub where inspiration never gets lost.
       </p>
       <form
         onSubmit={(e) => handleSubmit(e)}
-        className="flex flex-col gap-4 md:mr-28"
+        className="flex flex-col gap-4 md:mr-0 lg:mr-28 max-w-md"
       >
         <InputTag
           onChange={handleChange}

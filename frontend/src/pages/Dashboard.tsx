@@ -19,17 +19,17 @@ const Dashboard = () => {
   const stateDialog = useSelector((state: RootState) => state.commonState.dialogState);
   
   return (
-    <div className=" font-inter relative flex ">
+    <div className=" font-inter relative flex pb-32">
 
       {
         stateDialog && <Dialog />
       }
       
-  
+
       <Sidebar />
 
       
-      <div className="md:ml-[192px] ml-[45px] md:mr-[270px] w-full h-[91vh] mt-[9vh]  ">
+      <div className="md:ml-[192px] ml-[45px] md:mr-0 lg:mr-[270px] w-full h-[91vh] mt-[9vh] px-2 md:px-4 lg:px-0 ">
         <Outlet />
       </div>
 

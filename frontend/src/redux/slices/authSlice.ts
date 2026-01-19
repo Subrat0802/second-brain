@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import Cookies from "js-cookie";
 
 const token = Cookies.get("token");
-console.log("COOKIES", token);
+// console.log("COOKIES", token);
 
 const initialStae = {
     token: token || ""

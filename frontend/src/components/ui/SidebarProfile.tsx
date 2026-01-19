@@ -15,7 +15,7 @@ const SidebarProfile = () => {
   const [collectionInputText, setCollectionInputText] = useState("");
   const dispatch = useDispatch();
 
-  console.log("collectionInputText", collectionInputText)
+  // console.log("collectionInputText", collectionInputText)
 
   const userData = useSelector(
     (state: RootState) => state.commonState.userContent
@@ -34,7 +34,7 @@ const SidebarProfile = () => {
 
   if (!userData) {
     return (
-      <div className="w-[270px] fixed right-0 h-[100dvh] pt-[9dvh] border-l-2 hidden md:flex flex-col items-center justify-center bg-white dark:bg-[#080C13] dark:border-[#111827] border">
+      <div className="w-[270px] fixed right-0 h-[100dvh] pt-[9dvh] border-l-2 hidden lg:flex flex-col items-center justify-center bg-white dark:bg-[#080C13] dark:border-[#111827] border">
         <p className="text-gray-500 dark:text-gray-400">Loading...</p>
       </div>
     );
@@ -52,7 +52,7 @@ const SidebarProfile = () => {
 
   return (
     <div
-      className="w-[270px]  px-4 font-inter fixed right-0 h-[100dvh] pt-[9dvh] border-l-2 hidden md:flex flex-col dark:border-b-2 bg-white 
+      className="w-[270px]  px-4 font-inter fixed right-0 h-[100dvh] pt-[9dvh] border-l-2 hidden lg:flex flex-col dark:border-b-2 bg-white 
       dark:bg-[#080C13] dark:border-[#111827] border"
     >
       {!createCollectionState && (
@@ -78,13 +78,13 @@ const SidebarProfile = () => {
           </div>
           <div className="flex justify-start  w-full gap-2 mt-8 flex-col text-sm ">
             <p>Quick Actions</p>
-            <div className="flex text-white/50 text-[#0F141B] bg-[#e7eaf0] dark:text-white/40 dark:bg-[#0F141B] p-2 rounded-lg justify-start items-center gap-1">
+            <div className="flex  text-[#0F141B] bg-[#e7eaf0] dark:text-white/40 dark:bg-[#0F141B] p-2 rounded-lg justify-start items-center gap-1">
               <Plus width={15} /> Add New Items
             </div>
-            <div className="flex text-white/50 text-[#0F141B] bg-[#e7eaf0] dark:text-white/40 dark:bg-[#0F141B] p-2 rounded-lg justify-start items-center gap-1">
+            <div className="flex  text-[#0F141B] bg-[#e7eaf0] dark:text-white/40 dark:bg-[#0F141B] p-2 rounded-lg justify-start items-center gap-1">
               <Plus width={15} /> Create Collections
             </div>
-            <div className="flex text-white/50 text-[#0F141B] bg-[#e7eaf0] dark:text-white/40 dark:bg-[#0F141B] p-2 rounded-lg justify-start items-center gap-1">
+            <div className="flex  text-[#0F141B] bg-[#e7eaf0] dark:text-white/40 dark:bg-[#0F141B] p-2 rounded-lg justify-start items-center gap-1">
               <Plus width={15} /> Upload Files
             </div>
           </div>

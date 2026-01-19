@@ -35,13 +35,13 @@ const Signin = () => {
   }
 
   return (
-    <div className="flex flex-col  h-[100%] px-16  justify-center ">
-      <p className="text-3xl">Enter Your Digital Mind</p>
-      <p className="italic mb-10">
+    <div className="flex flex-col  h-[100%] px-4 sm:px-8 md:px-12 lg:px-16  justify-center ">
+      <p className="text-2xl sm:text-3xl">Enter Your Digital Mind</p>
+      <p className="italic mb-6 md:mb-10 text-sm sm:text-base">
         Log in to explore your organized world of saved content and rediscover
         what matters most.
       </p>
-      <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-4 md:mr-28">
+      <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-4 md:mr-0 lg:mr-28 max-w-md">
         <InputTag
           ref={emailRef}
           placeText="Email Address"

@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-// import { getYoutubeEmbedUrl } from "../../services/youtubeEmabaded"
-// import { Bookmark, Instagram, Send, Trash } from "lucide-react"
 import {
   Badge,
   BadgeCheck,
@@ -23,6 +21,9 @@ import { toast } from "sonner";
 // import { useDispatch } from "react-redux";
 // import { setSaveContent } from "../../redux/slices/commonStates";
 // import { saveContet } from "../../services/operations/content";
+interface SavedContent {
+  _id: string;
+}
 
 export interface contentProps {
   contentType: string;
@@ -34,6 +35,7 @@ export interface contentProps {
   image: string;
   contentShowType: string;
   id: string;
+  saved?:boolean
 }
 const GridContent = ({
   contentType,
@@ -45,13 +47,19 @@ const GridContent = ({
   image,
   contentShowType,
   id,
+  saved
 }: contentProps) => {
   const dispatch = useDispatch();
+  
   const { refreshUser } = useGetUser();
-  const savedItem =
-    useSelector(
-      (state: RootState) => state.commonState.userContent?.savedItem
-    ) || [];
+
+  const savedItem = useSelector(
+    (state: RootState) =>
+      (state.commonState.userContent?.savedItem ?? []) as SavedContent[]
+  );
+
+  const isSaved = savedItem.some(item => item._id === id);
+
 
   const collectionState = useSelector(
     (state: RootState) => state.commonState.createCollectionState
@@ -82,7 +90,7 @@ const GridContent = ({
   return (
     <div
       onClick={() => handleSelectCollection(id)}
-      className={`relative dark:bg-[#0F141B] bg-[#ebeff7] shadow-md  border dark:border-none  rounded-lg ${
+      className={`relative dark:bg-[#0F141B] bg-[#ebeff7]/40 shadow-md  border dark:border-none  rounded-lg ${
         collectionState && "cursor-pointer"
       }   ${contentShowType === "rows" ? "flex gap-4 " : "flex flex-col"}`}
     >
@@ -102,53 +110,53 @@ const GridContent = ({
         <div
           className={`${
             contentShowType === "rows"
-              ? " w-[20%] rounded-l-lg"
+              ? " w-[30%] sm:w-[25%] md:w-[20%] rounded-l-lg"
               : "w-full rounded-t-lg "
-          }  h-32  flex justify-center items-center bg-[#1F2937] dark:bg-[#252A31] text-white/70 `}
+          }  h-24 sm:h-28 md:h-32  flex justify-center items-center bg-[#1F2937]/70 dark:dark:bg-[#252A31] text-white/70 `}
         >
-          <Instagram />
+          <Instagram className="w-5 h-5 sm:w-6 sm:h-6" />
         </div>
       )}
       {contentType === "Link" && type === "Youtube" && (
         <div
           className={`${
             contentShowType === "rows"
-              ? " w-[20%] rounded-l-lg"
+              ? " w-[30%] sm:w-[25%] md:w-[20%] rounded-l-lg"
               : "w-full rounded-t-lg"
-          }  h-32  flex justify-center items-center dark:bg-[#252A31] bg-[#1F2937]  text-white/70`}
+          }  h-24 sm:h-28 md:h-32  flex justify-center items-center bg-[#1F2937]/70 dark:bg-[#252A31]  text-white/70`}
         >
-          <Youtube />
+          <Youtube className="w-5 h-5 sm:w-6 sm:h-6" />
         </div>
       )}
       {contentType === "Link" && type === "X" && (
         <div
           className={`${
             contentShowType === "rows"
-              ? " w-[20%] rounded-l-lg"
+              ? " w-[30%] sm:w-[25%] md:w-[20%] rounded-l-lg"
               : "w-full rounded-t-lg"
-          }  h-32  flex justify-center items-center dark:bg-[#252A31] text-white/70 bg-[#1F2937]`}
+          }  h-24 sm:h-28 md:h-32  flex justify-center items-center bg-[#1F2937]/70 text-white/70 dark:bg-[#252A31]`}
         >
-          <Twitter />
+          <Twitter className="w-5 h-5 sm:w-6 sm:h-6" />
         </div>
       )}
       {contentType === "Link" && type === "Other" && (
         <div
           className={`${
             contentShowType === "rows"
-              ? " w-[20%]  rounded-l-lg"
+              ? " w-[30%] sm:w-[25%] md:w-[20%]  rounded-l-lg"
               : "w-full rounded-t-lg"
-          }  h-32  flex justify-center items-center dark:bg-[#252A31] bg-[#1F2937] text-white/70`}
+          }  h-24 sm:h-28 md:h-32  flex justify-center items-center bg-[#1F2937]/70 dark:bg-[#252A31] text-white/70`}
         >
-          <Link />
+          <Link className="w-5 h-5 sm:w-6 sm:h-6" />
         </div>
       )}
       {contentType === "Image" && (
         <div
           className={`${
             contentShowType === "rows"
-              ? " w-[20%] rounded-l-lg"
+              ? " w-[30%] sm:w-[25%] md:w-[20%] rounded-l-lg"
               : "w-full rounded-t-lg"
-          }  h-32  flex justify-center items-center dark:bg-[#252A31] bg-[#1F2937] text-white/70`}
+          }  h-24 sm:h-28 md:h-32  flex justify-center items-center dark:bg-[#252A31]/70 bg-[#1F2937] text-white/70`}
         >
           <img
             className="object-cover h-[100%] w-full rounded-l-lg"
@@ -160,22 +168,21 @@ const GridContent = ({
         <div
           className={`${
             contentShowType === "rows"
-              ? " w-[20%] rounded-l-lg"
+              ? " w-[30%] sm:w-[25%] md:w-[20%] rounded-l-lg"
               : "w-full rounded-t-lg"
-          }  h-32  flex justify-center items-center dark:bg-[#252A31] bg-[#1F2937] text-white/70`}
+          }  h-24 sm:h-28 md:h-32  flex justify-center items-center dark:bg-[#252A31] bg-[#1F2937] text-white/70`}
         >
-          <NotebookTabs />
+          <NotebookTabs className="w-5 h-5 sm:w-6 sm:h-6" />
         </div>
       )}
 
-      <div className="p-3 space-y-1 w-full">
-        <p className="text-sm font-medium dark:text-white">{title}</p>
-        <p className="text-xs text-gray-500">{description}</p>
+      <div className="p-2 sm:p-3 space-y-1 w-full">
+        <p className="text-xs sm:text-sm font-medium dark:text-white">{title}</p>
+        <p className="text-xs text-gray-500 line-clamp-2">{description}</p>
         <p className="text-xs text-gray-500">
           Created At: {new Date(createdAt).toLocaleString()}
         </p>
 
-        {/* Actions */}
         <div className="flex justify-between w-[100%] items-center pt-2">
           <div>
             <button
@@ -183,23 +190,21 @@ const GridContent = ({
               className="p-1 hover:text-white transition-colors"
             >
             
-              {savedItem
-              //@ts-ignore
-              .includes(id) ? (
-                <BookmarkCheck size={18} />
+              {isSaved || saved ? (
+                <BookmarkCheck size={16} className="sm:w-[18px] sm:h-[18px]" />
               ) : (
-                <Bookmark size={18} />
+                <Bookmark size={16} className="sm:w-[18px] sm:h-[18px]" />
               )}
             </button>
             <button className="p-1 hover:text-white transition-colors">
               <a href={link || image} target="_blank">
-                <Send size={18} />
+                <Send size={16} className="sm:w-[18px] sm:h-[18px]" />
               </a>
             </button>
           </div>
 
           <button className="p-1 hover:text-white transition-colors">
-            <Trash size={18} />
+            <Trash size={16} className="sm:w-[18px] sm:h-[18px]" />
           </button>
         </div>
       </div>

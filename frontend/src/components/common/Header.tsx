@@ -54,32 +54,30 @@ const Header = () => {
     >
       <div className="max-w-7xl h-full mx-auto flex justify-between items-center font-inter  text-[#111827] dark:text-[#7F7F7F] py-2 ">
         <NavLink to={"/"}>
-          <div className="flex justify-center gap-2 items-center ">
-            <div className="bg-[#1F2937] dark:bg-[#0F141B] block p-2 md:p-3 rounded-xl">
-              <Brain className="w-6 h-6 text-white dark:text-[#7F7F7F]" />
+          <div className="flex justify-center gap-1 md:gap-2 items-center ">
+            <div className="bg-[#1F2937] dark:bg-[#0F141B] block p-1.5 md:p-2 lg:p-3 rounded-xl">
+              <Brain className="w-5 h-5 md:w-6 md:h-6 text-white dark:text-[#7F7F7F]" />
             </div>
-            <p className="text-2xl md:text-3xl font-medium  tracking-tight">
+            <p className="text-xl md:text-2xl lg:text-3xl font-medium  tracking-tight">
               SecondBrain
             </p>
           </div>
         </NavLink>
-        <div className={`md:flex gap-6 hidden  justify-center items-center font-medium text-lg text-[#4B5563] dark:text-[#7F7F7F] ${token ? "pl-24" : "pl-0"}`}>
+        <div className={`md:flex gap-4 lg:gap-6 hidden  justify-center items-center font-medium text-base lg:text-lg text-[#4B5563] dark:text-[#7F7F7F] ${token ? "pl-24" : "pl-0"}`}>
           <p>Dashboard</p>
           <p>Collections</p>
           <p>Explore</p>
         </div>
-        <div className="hidden md:flex gap-4 justify-center items-center">
-          {/* <Button text="Add Link" startIcon={<Plus />} varient="primary" size="sm"/> */}
-
+        <div className="hidden md:flex gap-2 lg:gap-4 justify-center items-center">
           {token ? (
-            <div className="flex justify-center items-center gap-4 ">
-              <div>
+            <div className="flex justify-center items-center gap-2 lg:gap-4 ">
+              <div className="hidden lg:block">
                 <InputTag type="text" placeText="Search Your Content." classStyle="rounded-full" id="search" onChange={handleChange}/>
               </div>
-              <Bell />
+              <Bell className="w-5 h-5 lg:w-6 lg:h-6" />
               <div className="relative cursor-pointer" onClick={handleOnMouseOver}  >
                 <div className="" >
-                  <User />
+                  <User className="w-5 h-5 lg:w-6 lg:h-6" />
                 </div>
                 <div className={`absolute right-0 mt-1 p-2 rounded-lg text-md bg-[#0F141B] ${onHover ? "block": "hidden"}`}>
                   <ul className="flex px-3  flex-col gap-3 text-lg text-white/50" onMouseLeave={handleOnMouseLeave}>
@@ -104,7 +102,7 @@ const Header = () => {
           <ThemeToggle />
         </div>
         <div className="text-2xl md:hidden flex justify-center gap-2 items-center">
-          <Menu className="w-8 h-8" />
+          <Menu className="w-6 h-6 md:w-8 md:h-8" />
           <ThemeToggle />
         </div>
       </div>

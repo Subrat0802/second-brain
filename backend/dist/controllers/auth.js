@@ -23,6 +23,7 @@ dotenv_1.default.config();
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password, username, conPassword } = yield zodValidation_1.signupValidation.parseAsync(req.body);
+        console.log(email, password, username, conPassword);
         if (!username || !email || !password || !conPassword) {
             return res.status(400).json({
                 message: "All fields are required",
@@ -34,7 +35,9 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 message: "Wrong password, password does not match",
             });
         }
+        console.log("SIGNUP HIT Before");
         const user = yield user_1.userModel.findOne({ email });
+        console.log("SIGNUP HIT AFter");
         if (user) {
             return res.status(409).json({
                 message: "User is already registered, try with different email address.",
@@ -53,6 +56,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 success: false,
             });
         }
+        console.log("SIGNUP HIT USER", createUser);
         res.status(200).json({
             message: "User created successfully",
             data: createUser,

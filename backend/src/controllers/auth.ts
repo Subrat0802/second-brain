@@ -11,8 +11,11 @@ dotenv.config();
 
 export const signup = async (req: Request, res: Response) => {
   try {
+    
+
     const { email, password, username, conPassword } =
       await signupValidation.parseAsync(req.body);
+      console.log(email, password, username, conPassword);
 
     if (!username || !email || !password || !conPassword) {
       return res.status(400).json({
@@ -26,8 +29,9 @@ export const signup = async (req: Request, res: Response) => {
         message: "Wrong password, password does not match",
       });
     }
-
+    console.log("SIGNUP HIT Before");
     const user = await userModel.findOne({ email });
+    console.log("SIGNUP HIT AFter");
 
     if (user) {
       return res.status(409).json({
@@ -51,7 +55,7 @@ export const signup = async (req: Request, res: Response) => {
         success: false,
       });
     }
-
+    console.log("SIGNUP HIT USER", createUser);
     res.status(200).json({
       message: "User created successfully",
       data: createUser,

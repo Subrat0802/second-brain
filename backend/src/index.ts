@@ -8,6 +8,8 @@ import { contentRoute } from "./routes/contentRoute";
 import { cloudinaryConnect } from "./config/cloudinaryConnect";
 import fileUpload from "express-fileupload";
 import { collectionRoute } from "./routes/collections";
+import os from "os";
+import path from "path";
 
 dotenv.config();
 
@@ -18,10 +20,12 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+
 app.use(fileUpload({
   useTempFiles:true,
-  tempFileDir: "/temp"
+  tempFileDir: path.join(os.tmpdir(), "second-brain-uploads")
 }))
+
 app.use(cors({
   origin: process.env.FRONTEND,
   credentials: true

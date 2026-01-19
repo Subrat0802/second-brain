@@ -14,7 +14,7 @@ const content_1 = require("../models/content");
 const user_1 = require("../models/user");
 const imageUpload_1 = require("../utils/imageUpload");
 const createContent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c;
+    var _a, _b;
     try {
         const { id } = req.user || {};
         const { contentType, link, title, description, type, tag } = req.body;
@@ -29,13 +29,18 @@ const createContent = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             contentType
         };
         if (contentType === "Link") {
-            // payload = { contentType, link, title, description, type, tag };
             payload.link = link;
             payload.type = type;
         }
-        else if (contentType === "Image" && ((_b = req.files) === null || _b === void 0 ? void 0 : _b.image)) {
-            const uploadImage = yield (0, imageUpload_1.uploadImageToCloudinary)((_c = req.files) === null || _c === void 0 ? void 0 : _c.image, process.env.FOLDER_NAME, 800, 60);
-            // payload = { contentType, title, description, image };
+        else if (contentType === "Image") {
+            if (!((_b = req.files) === null || _b === void 0 ? void 0 : _b.image)) {
+                return res.status(400).json({ message: "Image file is required for Image content type" });
+            }
+            const imageFile = Array.isArray(req.files.image) ? req.files.image[0] : req.files.image;
+            if (!imageFile.tempFilePath) {
+                return res.status(400).json({ message: "Invalid image file format" });
+            }
+            const uploadImage = yield (0, imageUpload_1.uploadImageToCloudinary)(imageFile, process.env.FOLDER_NAME, 800, 60);
             payload.image = uploadImage.secure_url;
         }
         else if (contentType === "Notes") {

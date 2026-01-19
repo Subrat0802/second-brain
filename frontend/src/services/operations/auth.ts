@@ -78,7 +78,7 @@ export const signin = async ({ email, password }: signinProps) => {
 export const getUser = async () => {
   try {
     const response = await apiConnector("GET", GET_USER);
-    console.log("HELLEEOEHNFB", response);
+    // console.log("HELLEEOEHNFB", response);
     return response;
   } catch (error) {
     console.log(error);

@@ -1,7 +1,7 @@
 
 const Discover = () => {
   return (
-    <div className="text-xl p-5">Discover</div>
+    <div className="text-lg sm:text-xl p-3 sm:p-5">Discover</div>
   )
 }
 

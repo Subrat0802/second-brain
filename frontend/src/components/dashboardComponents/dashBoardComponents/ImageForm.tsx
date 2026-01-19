@@ -3,6 +3,8 @@ import Button from "../../ui/Button";
 import InputTag from "../../ui/InputTag";
 import TextArea from "../../ui/TextArea";
 import { toast } from "sonner";
+import { contentEndpoint } from "../../../services/api";
+import useGetUser from "../../../services/getUserHook";
 
 
 const ImageForm = () => {
@@ -13,7 +15,8 @@ const ImageForm = () => {
     image: null as File | null,
   });
 
-  // Handle text + file inputs
+  const { refreshUser } = useGetUser();
+
   const onChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -27,26 +30,47 @@ const ImageForm = () => {
   };
 
   const handleSubmit = async () => {
+    if (!imageForm.image) {
+      toast.error("Please select an image");
+      return;
+    }
+
+    if (!imageForm.title || !imageForm.description) {
+      toast.error("Title and description are required");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("title", imageForm.title);
     formData.append("description", imageForm.description);
     formData.append("contentType", imageForm.contentType);
-    if (imageForm.image) {
-      formData.append("image", imageForm.image);
-    }
+    formData.append("image", imageForm.image);
 
     try {
-      const res = await fetch("http://localhost:3001/api/v1/content/create", {
+      const res = await fetch(contentEndpoint.CREATE_CONTENT, {
         method: "POST",
         body: formData,
-        credentials: "include", 
+        credentials: "include",
       });
 
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({ message: "Failed to upload image" }));
+        toast.error(errorData.message || `Error: ${res.status} ${res.statusText}`);
+        return;
+      }
+
       const data = await res.json();
-      toast.success("Image uplaoded")
-      console.log("UPLOAD RESPONSE:", data);
+      
+      if (data.success) {
+        toast.success(data.message || "Image uploaded successfully");
+        await refreshUser();
+        handleClear();
+      } else {
+        toast.error(data.message || "Failed to upload image");
+      }
     } catch (err) {
       console.error("UPLOAD ERROR:", err);
+      toast.error("Network error. Please check your connection and try again.");
     }
   };
 

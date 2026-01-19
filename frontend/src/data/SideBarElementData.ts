@@ -14,12 +14,7 @@ export const sideBarData:DataProps[] = [
         Icon: Home,
         link: "/dashboard",
     },
-    {
-        id: 2,
-        title: "Discover",
-        Icon: Compass,
-        link: "/dashboard/discover",
-    },
+    
     {
         id: 3,
         title: "Saved",
@@ -43,6 +38,12 @@ export const sideBarData:DataProps[] = [
         title: "Collections",
         Icon: Folder,
         link: "/dashboard/collections",
+    },
+    {
+        id: 2,
+        title: "Discover",
+        Icon: Compass,
+        link: "/dashboard/discover",
     },
     {
         id: 7,

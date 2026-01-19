@@ -13,11 +13,11 @@ const Sidebar = () => {
   }
   return (
     <div className="dark:bg-[#080C13] fixed text-[#4B5563] dark:text-[#7F7F7F] border-r-2  dark:border-r-2 dark:border-[#111827] h-screen flex pt-[10dvh]">
-      <div className="h-full flex flex-col gap-3 md:p-3 ">
+      <div className="h-full flex flex-col gap-2 md:gap-3 p-1 md:p-3 ">
 
         {
           sideBarData.map((el) => (
-            <SidebarElement title={el.title} Icon={el.Icon} link={el.link} clikedPage={clikedPage} onClick={(e) => onClickHandle(e)}/>
+            <SidebarElement key={el.id} title={el.title} Icon={el.Icon} link={el.link} clikedPage={clikedPage} onClick={(e) => onClickHandle(e)}/>
           ))
         }
       </div>

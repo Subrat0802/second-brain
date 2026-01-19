@@ -53,7 +53,7 @@ const LinkForm = () => {
   }
 
   return (
-    <div className="flex flex-col gap-3 text-black dark:text-white/80">
+    <div className="flex flex-col gap-3 text-black dark:text-white/50">
       <InputTag placeText="Url" labelText="URL:" id="url" type="text" ref={linkRef} onChange={handleOnChange}/>
       <InputTag placeText="Title" labelText="Title:" id="title" type="text" ref={titleRef}/>
       <TextArea

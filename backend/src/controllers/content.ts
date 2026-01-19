@@ -27,13 +27,21 @@ export const createContent = async (req: AuthRequest, res: Response) => {
     }
 
     if (contentType === "Link") {
-      // payload = { contentType, link, title, description, type, tag };
       payload.link = link;
       payload.type = type;
     } 
-    else if (contentType === "Image" && req.files?.image) {
-      const uploadImage = await uploadImageToCloudinary(req.files?.image, process.env.FOLDER_NAME, 800, 60);
-      // payload = { contentType, title, description, image };
+    else if (contentType === "Image") {
+      if (!req.files?.image) {
+        return res.status(400).json({ message: "Image file is required for Image content type" });
+      }
+      
+      const imageFile = Array.isArray(req.files.image) ? req.files.image[0] : req.files.image;
+      
+      if (!imageFile.tempFilePath) {
+        return res.status(400).json({ message: "Invalid image file format" });
+      }
+      
+      const uploadImage = await uploadImageToCloudinary(imageFile, process.env.FOLDER_NAME, 800, 60);
       payload.image = uploadImage.secure_url;
     } 
     else if (contentType === "Notes"){

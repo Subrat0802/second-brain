@@ -16,20 +16,25 @@ export const ContentCard = () => {
     (state: RootState) => state.commonState.showContent
   );
 
+
+  if(userContent == null){
+    return <p>No content</p>
+  }
+
   return (
     <div
       className={`${
-        contentShowType === "grid" && "grid grid-cols-3 gap-4 mt-5"
+        contentShowType === "grid" && "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mt-5"
       } 
                     ${contentShowType === "rows" && "flex flex-col gap-3 mt-5"}
-                    ${contentShowType === "eye" && "grid md:grid-cols-2 gap-20 w-fit mx-auto mt-5 "}
+                    ${contentShowType === "eye" && "grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 w-fit mx-auto mt-5 "}
                     `}
     >
       {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         userContent.length === 0 ? (
-          <p>Loading..</p>
+          <div className="w-full  flex justify-center items-center h-screen">No content available</div>
         ) : (
           
           userContent
