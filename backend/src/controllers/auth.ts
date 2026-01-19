@@ -118,8 +118,11 @@ export const signin = async (req: Request, res: Response) => {
 
     const options = {
       expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-      // httpOnly: true,
+      httpOnly: true,
+      secure: true,        
+      sameSite: "none",    
     };
+
 
     (findUser as any).password = undefined;
 
