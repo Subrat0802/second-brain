@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { CookieOptions, Request, Response } from "express";
 import { userModel } from "../models/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -116,7 +116,7 @@ export const signin = async (req: Request, res: Response) => {
       { expiresIn: "24h" }
     );
 
-    const options = {
+    const options: CookieOptions = {
       expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
       httpOnly: true,
       secure: true,        
